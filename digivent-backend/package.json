@@ -1,11 +1,12 @@
 {
   "name": "sharing-app-backend",
   "version": "1.0.0",
-  "description": "",
+  "description": "1.Type npm init to terminul",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js"
+
   },
   "author": "Sylvia",
   "license": "ISC",

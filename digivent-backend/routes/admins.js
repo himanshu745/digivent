@@ -12,4 +12,10 @@ router.get("/", (req, res, next) => {
     .catch(next);
 });
 
+router.post("/", (req, res, next) => {
+  console.log(req.body)
+});
+
+
+
 module.exports = router;
