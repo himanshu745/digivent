@@ -3,7 +3,6 @@ const router = require("express").Router();
 const User = require("../models/User.js");
 const Event = require("../models/Event.js");
 
-
 router.param("id", (req, res, next, id) => {
   User.findById(id)
     .then((user) => {
@@ -54,7 +53,6 @@ router.delete("/:id", (req, res, next) => {
   });
 });
 
-
 router.get("/:id/events", (req, res, next) => {
   Event.find({ user: req.user.id })
     .sort({ createdAt: "desc" })
@@ -84,9 +82,6 @@ router.post("/:id/events", (req, res, next) => {
     .catch(next);
 });
 
-
-
-
 router.post("/login", (req, res, next) => {
   if (!req.body.email) {
     return res.status(422).send("Email can't be blank");
@@ -115,7 +110,6 @@ router.post("/register", function (req, res, next) {
     return res.status(422).send("Email can't be blank");
   }
 
-  
   User.findOne({ email: req.body.email })
     .then((user) => {
       if (user) {
