@@ -14,11 +14,7 @@ const UserSchema = new mongoose.Schema(
     userName: { type: String, required: true },
     password: { type: String, required: true },
     image: String,
-<<<<<<< HEAD
-    events: [{ type: mongoose.Schema.Types.ObjectId, ref: "Events" }]
-=======
     events: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
->>>>>>> upstream/master
   },
   { timestamps: true }
 );

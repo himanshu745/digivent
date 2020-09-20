@@ -1,5 +1,4 @@
 const router = require("express").Router();
-
 const Event = require("../models/Event");
 
 router.param("id", (req, res, next, id) => {

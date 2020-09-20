@@ -8,13 +8,8 @@ const EventSchema = new mongoose.Schema(
     time: { type: String, required: true },
     address: { type: String, required: true },
     image: { type: String, required: true },
-<<<<<<< HEAD
-    speaker:{type: mongoose.Schema.Types.ObjectId, ref: "Admin"},
-    user:{type: mongoose.Schema.Types.ObjectId, ref: "User"}
-=======
-    speaker: { type: mongoose.Schema.Types.ObjectId, ref: "Admin" },
+    speaker: { type: mongoose.Schema.Types.ObjectId, ref: "Speaker" },
     guests: [{ type: mongoose.Schema.Types.ObjectId, ref: "User" }],
->>>>>>> upstream/master
   },
   { timestamps: true }
 );
