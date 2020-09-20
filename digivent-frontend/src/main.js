@@ -19,21 +19,19 @@ const routes = [
     component: () => import("./components/edit-event/EditEvent.vue"),
     props: true,
   },
-  
- {
- name: "LoginUser",
- path: "/loginU",
- component: () => import("./components/"),
- props: true,
- },
- {
- name: "LoginSpeaker",
- path: "/loginS",
- component: () => import("./components/"),
- props: true,
- }
 
-  
+  {
+    name: "LoginUser",
+    path: "/loginU",
+    component: () => import("./components/user-login/UserLogIn.vue"),
+    props: true,
+  },
+  {
+    name: "LoginSpeaker",
+    path: "/loginS",
+    //  component: () => import("./components/"),
+    props: true,
+  },
 ];
 
 const router = new VueRouter({
