@@ -1,4 +1,3 @@
- 
 const router = require("express").Router();
 const User = require("../models/User.js");
 const Event = require("../models/Event.js");
@@ -71,7 +70,7 @@ router.post("/:id/events", (req, res, next) => {
       if (!req.user.events) {
         req.user.events = [];
       }
-            req.user.event.push(event);
+      req.user.event.push(event);
       req.user
         .save()
         .then((user) => {
@@ -87,19 +86,17 @@ router.post("/login", (req, res, next) => {
     return res.status(422).send("Email can't be blank");
   }
 
-  
   User.findOne({ email: req.body.email })
     .then(function (user) {
-      if (!user) { 
+      if (!user) {
         return res.status(422).send("User not found");
-      } 
+      }
       return res.send(user);
     })
     .catch(next);
 });
 
 router.post("/register", function (req, res, next) {
- 
   if (!req.body.username) {
     return res.status(422).send("Username can't be blank");
   }

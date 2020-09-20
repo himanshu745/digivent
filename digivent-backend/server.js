@@ -21,6 +21,8 @@ mongoose.connect(process.env.MONGODB_URI, {
   useUnifiedTopology: true,
   useFindAndModify: false,
 });
+// mongoose.set("useCreateIndex", true);
+
 mongoose.connection.on("open", function (ref) {
   console.log("MongoDB connected");
   app.listen(3000, () => {
@@ -40,13 +42,12 @@ app.get("/", (req, res) => {
 const events = require("./routes/events.js");
 const users = require("./routes/users.js");
 const admins = require("./routes/admins.js");
-const questions = require("./routes/questions.js")
+const questions = require("./routes/questions.js");
 
 app.use("/events", events);
 app.use("/users", users);
 app.use("/admins", admins);
 app.use("/questions", questions);
-
 
 // ERRORS ----------------------------------------------------------------
 

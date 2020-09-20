@@ -2,8 +2,8 @@ const mongoose = require("mongoose");
 
 const AdminSchema = new mongoose.Schema(
   {
-    firstname: String,
-    lastname: String,
+    firstName: String,
+    lastName: String,
     description: String,
     email: {
       type: String,
@@ -13,10 +13,11 @@ const AdminSchema = new mongoose.Schema(
       match: [/\S+@\S+\.\S+/, "not a valid email address"],
       index: true,
     },
-    username: { type: String, required: true },
+    userName: { type: String, required: true },
     password: { type: String, required: true },
     image: String,
-    events: [{ type: mongoose.Schema.Types.ObjectId, ref: "Events" }]
+    events: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
+    questions: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
   },
   { timestamps: true }
 );

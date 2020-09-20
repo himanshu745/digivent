@@ -33,7 +33,18 @@ router.post("/", (req, res, next) => {
     })
     .catch(next);
 });
+////
 
+// router.get("/speaker/:name", (req, res, next) => {
+//   Event.find({ speaker: req.event.speaker })
+//     .sort({ createdAt: "desc" })
+//     .then((results) => {
+//       return res.status(200).send(results);
+//     })
+//     .catch(next);
+// });
+
+/////
 router.get("/:id", (req, res, next) => {
   return res.status(200).send(req.event);
 });

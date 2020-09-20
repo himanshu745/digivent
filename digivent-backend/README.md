@@ -1,4 +1,4 @@
-# To start,
+# To install,
 
 1. Type npm install to terminul
 
@@ -10,4 +10,6 @@
 MONGODB_URI=<YOUR_CONNECTION_URL>
 ```
 
-3. npm run start
+# To start
+
+3. npm start | nodemon
