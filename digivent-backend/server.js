@@ -41,12 +41,12 @@ app.get("/", (req, res) => {
 
 const events = require("./routes/events.js");
 const users = require("./routes/users.js");
-const admins = require("./routes/admins.js");
+const speakers = require("./routes/speakers.js");
 const questions = require("./routes/questions.js");
 
 app.use("/events", events);
 app.use("/users", users);
-app.use("/admins", admins);
+app.use("/speakers", speakers);
 app.use("/questions", questions);
 
 // ERRORS ----------------------------------------------------------------

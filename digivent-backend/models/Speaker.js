@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const AdminSchema = new mongoose.Schema(
+const SpeakerSchema = new mongoose.Schema(
   {
     firstName: String,
     lastName: String,
@@ -22,4 +22,4 @@ const AdminSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-module.exports = mongoose.model("Admin", AdminSchema);
+module.exports = mongoose.model("Speaker", SpeakerSchema);

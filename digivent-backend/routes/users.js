@@ -2,19 +2,6 @@ const router = require("express").Router();
 const User = require("../models/User.js");
 const Event = require("../models/Event.js");
 
-router.param("id", (req, res, next, id) => {
-  User.findById(id)
-    .then((user) => {
-      if (!user) {
-        res.status(404).send("User not found");
-      } else {
-        req.user = user;
-        return next();
-      }
-    })
-    .catch(next);
-});
-
 router.get("/", (req, res, next) => {
   User.find({})
     .sort({ createdAt: "desc" })
@@ -122,4 +109,8 @@ router.post("/register", function (req, res, next) {
     })
     .catch(next);
 });
+router.post("/", (req, res, next) => {
+  console.log(req.body);
+});
+
 module.exports = router;
