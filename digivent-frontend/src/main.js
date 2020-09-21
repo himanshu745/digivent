@@ -25,6 +25,11 @@ const routes = [
     // component: () => import("./components/")
     props: true,
   },
+  {
+    name: "login",
+    path: "/user-login",
+    component: () => import("./components/user-login/UserLogIn"),
+  },
 ];
 
 const router = new VueRouter({
