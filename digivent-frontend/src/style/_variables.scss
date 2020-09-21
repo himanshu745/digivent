@@ -17,7 +17,7 @@ $primary: navy;
 
 /* Button/Primary */
 
-@mixin button {
+@mixin buttonprimary {
   display: flex;
   flex-direction: column;
   padding: 22px 32px;
@@ -29,5 +29,16 @@ $primary: navy;
   bottom: 367px;
 
   background: #5cdb95;
+  border-radius: 20px;
+}
+
+@mixin secondarybutton {
+  position: absolute;
+  width: 144.39px;
+  height: 65px;
+  left: 58px;
+  top: 700px;
+
+  background: #edf5e1;
   border-radius: 20px;
 }
