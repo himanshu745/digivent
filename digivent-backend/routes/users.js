@@ -84,7 +84,7 @@ router.post("/login", (req, res, next) => {
 });
 
 router.post("/register", function (req, res, next) {
-  if (!req.body.username) {
+  if (!req.body.userName) {
     return res.status(422).send("Username can't be blank");
   }
   if (!req.body.password) {
