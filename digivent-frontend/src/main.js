@@ -24,6 +24,7 @@ const routes = [
     path: "/login",
     component: () => import("./components/login/Login"),
   },
+
   {
     name: "register-user",
     path: "/register-user",

@@ -12,20 +12,20 @@
         </ul>
       </div>
       <div>
+        <div class="user"></div>
+      </div>
+      <div>
         <label for="username">User Name</label>
         <input v-model="user.userName" type="text" name="name" id="username" />
       </div>
       <div>
         <label for="pasword">Password</label>
-        <input
-          v-model="user.password"
-          type="text"
-          name="password"
-          id="password"
-        />
+        <input v-model="user.password" type="text" name="password" id="password" />
       </div>
       <div>
-        <input type="submit" value="Log In" />
+        <router-link to="/">
+          <input type="submit" value="Log In" />
+        </router-link>
       </div>
     </form>
   </div>
@@ -38,9 +38,9 @@ export default {
     return {
       user: {
         userName: "",
-        password: "",
+        password: ""
       },
-      errors: [],
+      errors: []
     };
   },
   methods: {
@@ -69,8 +69,8 @@ export default {
           this.errors.push(response.body);
         }
       );
-    },
-  },
+    }
+  }
 };
 </script>
 

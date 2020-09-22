@@ -1,11 +1,12 @@
 <template>
   <div class="navbar">
     <router-link v-bind:to="'/'">HOME</router-link>
-    <router-link v-if="loggedIn === 'yes'" v-bind:to="'/login'">Login</router-link>
-    <a v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut" href>Log Out</a>
+    <!-- <router-link v-if="loggedIn === 'yes'" v-bind:to="'/login'"></router-link> -->
+    <!-- <a v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut" href></a> -->
     <router-link :to="'/events'">QUESTION</router-link>
     <router-link :to="'/events'">MY EVENTS</router-link>
     <router-link :to="'/events'">PROFILE</router-link>
+    <h1>{{userName}}</h1>
   </div>
 </template>
 
