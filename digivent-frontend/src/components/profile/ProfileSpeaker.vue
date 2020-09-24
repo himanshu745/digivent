@@ -36,10 +36,10 @@ export default {};
 </script>
 
 <style lang="scss" scoped>
-// @import "@../style/_variables.scss";
+@import "@/style/_variables.scss";
 
 h1 {
-  // @include heading-large;
+  @include heading-large;
 }
 
 .info {
