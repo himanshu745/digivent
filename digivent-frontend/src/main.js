@@ -20,11 +20,18 @@ const routes = [
     props: true,
   }, 
   {
+    name: "details",
+    path: "/events/:eventId/details",
+    component: () => import("./components/event-details/EventDetails.vue"),
+    props: true,
+  },
+
+  {
     name: "profilespeaker",
     path: "/profilespeaker",
     component: () => import("./components/profile/ProfileSpeaker.vue"),
     props: true,
-    },
+  },
     {
       name: "profileuser",
       path: "/profileuser",
@@ -47,7 +54,7 @@ const routes = [
     path: "/register-speaker",
     component: () => import("./components/register/RegisterSpeaker"),
     props: true,
-    }
+  },
 ];
 
 const router = new VueRouter({

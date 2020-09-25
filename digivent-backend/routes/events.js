@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Event = require("../models/Event");
+const Speaker = require("../models/Speaker.js");
 
 router.param("id", (req, res, next, id) => {
   Event.findById(id)
@@ -23,30 +24,29 @@ router.get("/", (req, res, next) => {
     .catch(next);
 });
 
-router.post("/", (req, res, next) => {
-  const event = new Event(req.body);
-  event
-    .save()
-    .then((result) => {
-      return res.status(201).send(result);
-    })
-    .catch(next);
-});
-////
-
-// router.get("/speaker/:name", (req, res, next) => {
-//   Event.find({ speaker: req.event.speaker })
-//     .sort({ createdAt: "desc" })
-//     .then((results) => {
-//       return res.status(200).send(results);
-//     })
-//     .catch(next);
-// });
-
-/////
 router.get("/:id", (req, res, next) => {
   return res.status(200).send(req.event);
 });
+
+router.get("/:id/speaker", (req, res, next) => {
+  Speaker.find({ _id: req.event.speaker })
+    .sort({ createdAt: "desc" })
+    .then((speaker) => {
+      return res.status(200).send(speaker[0]);
+    })
+    .catch(next);
+});
+
+// Post new event
+// router.post("/", (req, res, next) => {
+//   const event = new Event(req.body);
+//   event
+//     .save()
+//     .then((result) => {
+//       return res.status(201).send(result);
+//     })
+//     .catch(next);
+// });
 
 router.put("/:id", (req, res, next) => {
   Event.findByIdAndUpdate(req.event.id, req.body)

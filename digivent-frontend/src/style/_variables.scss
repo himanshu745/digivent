@@ -1,6 +1,6 @@
 // Colors
 
-$primary-color: navy;
+$primary: #05386b;
 $secondary: #379683;
 
 // fonts
@@ -9,7 +9,7 @@ $secondary: #379683;
   height: 79px;
   left: 44px;
   top: 210px;
-  font-family: Roboto;
+  font-family: "Roboto", sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 36px;
@@ -44,4 +44,15 @@ $secondary: #379683;
 
   background: #edf5e1;
   border-radius: 20px;
+}
+
+@mixin fit-image {
+  overflow: hidden;
+  position: relative;
+  img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }

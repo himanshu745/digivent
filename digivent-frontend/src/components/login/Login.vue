@@ -1,12 +1,16 @@
 <template>
   <div>
     <h1>Log In</h1>
-    <div>
-      <h2>USER</h2>
-      <h2>SPEAKER</h2>
+    <div class="login">
+      <button @click="userForm === true">User</button>
+      <button @click="userForm === false">Speaker</button>
+
+      <!-- <li>
+        <a v-on:click="speaker" href="checKSpeaker">SPEAKER</a>
+      </li>-->
     </div>
 
-    <form class="user" v-on:submit.prevent="checkForm">
+    <form v-if="userForm !== userForm" class="user" v-on:submit.prevent="checkUser">
       <div v-if="errors.length">
         <p>
           <b>Please correct the following</b>
@@ -15,13 +19,7 @@
           <li>{{ error }}</li>
         </ul>
       </div>
-      <div class="id">
-        <div class="user">
-          <ul>
-            <a href>USER</a>
-          </ul>
-        </div>
-      </div>
+
       <div>
         <label for="username">User Name</label>
         <input v-model="user.userName" type="text" name="name" id="username" />
@@ -34,7 +32,7 @@
         <input type="submit" value="Log In" />
       </div>
     </form>
-    <form class="speaker" v-on:submit.prevent="checkForm">
+    <form v-else class="speaker" v-on:submit.prevent="checkSpeaker">
       <div v-if="errors.length">
         <p>
           <b>Please correct the following</b>
@@ -43,13 +41,7 @@
           <li>{{ error }}</li>
         </ul>
       </div>
-      <div class="id">
-        <div class="speaker">
-          <ul>
-            <a href>SPEAKER</a>
-          </ul>
-        </div>
-      </div>
+
       <div>
         <label for="username">User Name</label>
         <input v-model="speaker.userName" type="text" name="name" id="username" />
@@ -70,6 +62,7 @@ import EventBus from "../../eventBus.js";
 export default {
   data: function() {
     return {
+      userForm: false,
       user: {
         userName: "",
         password: ""
@@ -82,7 +75,7 @@ export default {
     };
   },
   methods: {
-    checkForm: function(event) {
+    checkUser: function(event) {
       console.log("user");
       event.preventDefault();
       this.errors = [];
@@ -91,6 +84,17 @@ export default {
       }
       if (!this.errors.length) {
         this.loginUser(this.user);
+      }
+    },
+    checkSpeaker: function(event) {
+      console.log("speaker");
+      event.preventDefault();
+      this.errors = [];
+      if (!this.speaker.userName) {
+        this.errors.push("Username required");
+      }
+      if (!this.errors.length) {
+        this.loginSpeaker(this.speaker);
       }
     },
     loginUser(user) {
@@ -112,12 +116,12 @@ export default {
 
     loginSpeaker(speaker) {
       this.$http
-        .post(`${process.env.VUE_APP_API_URL}speaker/login`, speaker)
+        .post(`${process.env.VUE_APP_API_URL}speakers/login`, speaker)
         .then(
           function(response) {
-            if (response.body.speakerName) {
+            if (response.body.userName) {
               localStorage.loggedIn = "yes";
-              localStorage.speakerName = speaker.speakerName;
+              localStorage.speakerName = speaker.userName;
               localStorage.speakerId = response.body._id;
               EventBus.$emit("$loggedIn");
               this.$router.push({ path: "/" });
@@ -132,4 +136,5 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+</style>

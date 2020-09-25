@@ -1,26 +1,27 @@
 <template>
   <div>
-    <form>
-      <label for="search">Search events</label>
-      <input v-model="search" type="text" id="search" />
-    </form>
+    <!-- <form>
+      <input v-model="search" @change="searchEvent" type="text" id="search" />
+      <router-link :to="{ name: 'edit' }">New event</router-link>
+    </form>-->
   </div>
 </template>
 
 <script>
+// import eventBus from "../eventBus";
+
 export default {
   name: "MySearchbar",
-  props: ["events"],
-  data: function() {
-    return {};
-  },
-  //   computed: {
-  //     filteredEvents() {
-  //       return this.events.filter((event) => {
-  //         return event.name.toLowerCase().includes(this.search.toLowerCase());
-  //       });
-  //     },
+  // data() {
+  //   return {
+  //     search: null,
+  //   };
+  // },
+  // methods: {
+  //   searchEvent() {
+  //     eventBus.$emit("$filterEvent", this.search);
   //   },
+  // },
 };
 </script>
 
