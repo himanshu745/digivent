@@ -4,10 +4,6 @@
     <div class="login">
       <button @click="userForm === true">User</button>
       <button @click="userForm === false">Speaker</button>
-
-      <!-- <li>
-        <a v-on:click="speaker" href="checKSpeaker">SPEAKER</a>
-      </li>-->
     </div>
 
     <form v-if="userForm !== userForm" class="user" v-on:submit.prevent="checkUser">
@@ -60,22 +56,22 @@
 <script>
 import EventBus from "../../eventBus.js";
 export default {
-  data: function() {
+  data: function () {
     return {
       userForm: false,
       user: {
         userName: "",
-        password: ""
+        password: "",
       },
       speaker: {
         userName: "",
-        password: ""
+        password: "",
       },
-      errors: []
+      errors: [],
     };
   },
   methods: {
-    checkUser: function(event) {
+    checkUser: function (event) {
       console.log("user");
       event.preventDefault();
       this.errors = [];
@@ -86,7 +82,7 @@ export default {
         this.loginUser(this.user);
       }
     },
-    checkSpeaker: function(event) {
+    checkSpeaker: function (event) {
       console.log("speaker");
       event.preventDefault();
       this.errors = [];
@@ -99,7 +95,7 @@ export default {
     },
     loginUser(user) {
       this.$http.post(`${process.env.VUE_APP_API_URL}users/login`, user).then(
-        function(response) {
+        function (response) {
           if (response.body.userName) {
             localStorage.loggedIn = "yes";
             localStorage.userName = user.userName;
@@ -108,7 +104,7 @@ export default {
             this.$router.push({ path: "/" });
           }
         },
-        function(response) {
+        function (response) {
           this.errors.push(response.body);
         }
       );
@@ -118,7 +114,7 @@ export default {
       this.$http
         .post(`${process.env.VUE_APP_API_URL}speakers/login`, speaker)
         .then(
-          function(response) {
+          function (response) {
             if (response.body.userName) {
               localStorage.loggedIn = "yes";
               localStorage.speakerName = speaker.userName;
@@ -127,12 +123,12 @@ export default {
               this.$router.push({ path: "/" });
             }
           },
-          function(response) {
+          function (response) {
             this.errors.push(response.body);
           }
         );
-    }
-  }
+    },
+  },
 };
 </script>
 

@@ -15,26 +15,17 @@
       </div>
       <div class="row">
         <p>Last name:</p>
-<<<<<<< HEAD
-=======
         <p>{{speaker.lastName}}</p>
 
->>>>>>> 398e33654bfdecd06dc00bd537d863e79e2344ac
         <p></p>
       </div>
       <div class="row">
         <p>Username:</p>
-<<<<<<< HEAD
-      </div>
-      <div class="row">
-        <p>Email:</p>
-=======
         <p>{{speaker.userName}}</p>
       </div>
       <div class="row">
         <p>Email:</p>
         <p>{{speaker.email}}</p>
->>>>>>> 398e33654bfdecd06dc00bd537d863e79e2344ac
       </div>
       <div class="row">
         <p>Description:</p>
