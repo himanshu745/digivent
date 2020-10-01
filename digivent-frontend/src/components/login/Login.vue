@@ -2,11 +2,14 @@
   <div>
     <h1>Log In</h1>
     <div class="login">
-      <button @click="userForm === true">User</button>
-      <button @click="userForm === false">Speaker</button>
+      <div class="formButton">
+        <button @click="show = true">User</button>
+
+        <button @click="show = false">Speaker</button>
+      </div>
     </div>
 
-    <form v-if="userForm !== userForm" class="user" v-on:submit.prevent="checkUser">
+    <form v-if="show" class="user" v-on:submit.prevent="checkUser">
       <div v-if="errors.length">
         <p>
           <b>Please correct the following</b>
@@ -28,7 +31,7 @@
         <input type="submit" value="Log In" />
       </div>
     </form>
-    <form v-else class="speaker" v-on:submit.prevent="checkSpeaker">
+    <form v-else v-on:submit.prevent="checkSpeaker">
       <div v-if="errors.length">
         <p>
           <b>Please correct the following</b>
@@ -39,7 +42,7 @@
       </div>
 
       <div>
-        <label for="username">User Name</label>
+        <label for="username">Speaker Name</label>
         <input v-model="speaker.userName" type="text" name="name" id="username" />
       </div>
       <div>
@@ -58,7 +61,7 @@ import EventBus from "../../eventBus.js";
 export default {
   data: function () {
     return {
-      userForm: false,
+      show: true,
       user: {
         userName: "",
         password: "",
@@ -117,7 +120,7 @@ export default {
           function (response) {
             if (response.body.userName) {
               localStorage.loggedIn = "yes";
-              localStorage.speakerName = speaker.userName;
+              localStorage.userName = speaker.userName;
               localStorage.speakerId = response.body._id;
               EventBus.$emit("$loggedIn");
               this.$router.push({ path: "/" });
@@ -132,5 +135,6 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import "@/style/_variables.scss";
 </style>
