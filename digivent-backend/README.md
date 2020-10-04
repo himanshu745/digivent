@@ -12,4 +12,4 @@ MONGODB_URI=<YOUR_CONNECTION_URL>
 
 # To start
 
-3. npm start | nodemon
+3. npm start

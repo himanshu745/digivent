@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const UserSchema = new mongoose.Schema(
   {
-    questions: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
     email: {
       type: String,
       lowercase: true,

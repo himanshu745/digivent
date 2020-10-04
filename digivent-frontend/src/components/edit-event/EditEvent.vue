@@ -1,15 +1,21 @@
 <template>
   <div>
     <h3>Host details</h3>
-    <img src alt />
-    <div>
-      <p>Host name</p>
-      <h4>speaker.firstName</h4>
+    <div class="thumb thumb--b">
+      <img :src="event.speaker.image" :alt="event.speaker.firstName" />
     </div>
+    <p>Host name</p>
+    <h3>{{ event.speaker.firstName }} {{ event.speaker.lastName }}</h3>
     <form v-on:submit.prevent="checkForm">
       <div>
         <label for="name">Event Name</label>
-        <input v-model="event.name" id="name" name="name" type="text" placeholder="Enter the name" />
+        <input
+          v-model="event.name"
+          id="name"
+          name="name"
+          type="text"
+          placeholder="Enter the name"
+        />
       </div>
       <div>
         <label for="date">Date</label>
@@ -21,7 +27,12 @@
       </div>
       <div>
         <label for="address">address</label>
-        <input v-model="event.address" id="address" name="address" type="address" />
+        <input
+          v-model="event.address"
+          id="address"
+          name="address"
+          type="address"
+        />
       </div>
       <div>
         <label for="description">Description</label>
@@ -43,9 +54,7 @@
         />
       </div>
       <div>
-
         <input type="submit" :value="mode" />
-
       </div>
     </form>
   </div>
@@ -53,7 +62,8 @@
 <script>
 export default {
   name: "edit",
-  data: function () {
+
+  data: function() {
     return {
       mode: "Add Event",
       editing: false,
@@ -64,11 +74,16 @@ export default {
         time: null,
         address: null,
         image: null,
+        speaker: {
+          image: String,
+          firstName: String,
+          lastName: String,
+        },
       },
     };
   },
   methods: {
-    checkForm: function () {
+    checkForm: function() {
       if (
         this.event.name &&
         this.event.description &&
@@ -79,39 +94,47 @@ export default {
       ) {
         if (this.editing) {
           this.editEvent(this.event);
-
         } else {
           this.createEvent(this.event);
         }
       }
     },
 
-    createEvent: function (event) {
+    createEvent: function(event) {
+      const speakerId = localStorage.speakerId;
       console.log(event);
       this.$http
-        .post(`${process.env.VUE_APP_API_URL}events`, event)
-        .then(function () {
-          this.$router.push({ path: "/events" });
+        .post(
+          `${process.env.VUE_APP_API_URL}speakers/${speakerId}/events`,
+          event
+        )
+        .then(function() {
+          this.$router.push({ path: "/" });
         });
     },
 
-
-    editEvent: function (event) {
+    editEvent: function(event) {
       this.$http
         .put(`${process.env.VUE_APP_API_URL}events/${event._id}`, event)
-        .then(function () {
-          this.$router.push({ path: "/events" });
+        .then(function() {
+          this.$router.push({ path: "/" });
         });
     },
   },
-  created: function () {
+  created: function() {
+    const speakerId = localStorage.speakerId;
+    this.$http
+      .get(`${process.env.VUE_APP_API_URL}speakers/${speakerId}`)
+      .then(function(data) {
+        this.event.speaker = data.body;
+      });
     const eventId = this.$route.params.eventId;
     if (eventId) {
       this.editing = true;
       this.mode = "Edit Event";
       this.$http
         .get(`${process.env.VUE_APP_API_URL}events/${eventId}`)
-        .then(function (data) {
+        .then(function(data) {
           this.event = data.body;
         });
     }
@@ -119,4 +142,17 @@ export default {
 };
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+@import "@/style/_variables.scss";
+.flexbox {
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.thumb {
+  @include thumb-img;
+  &--b {
+    @include thumb-img--b;
+  }
+}
+</style>

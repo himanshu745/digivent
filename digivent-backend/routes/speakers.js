@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Speaker = require("../models/Speaker.js");
 const Event = require("../models/Event.js");
+const Question = require("../models/Question.js");
 
 router.param("id", (req, res, next, id) => {
   Speaker.findById(id)
@@ -61,6 +62,7 @@ router.get("/:id/events", (req, res, next) => {
     .catch(next);
 });
 
+//Post event by speakerId
 router.post("/:id/events", (req, res, next) => {
   const event = new Event(req.body);
   event.speaker = req.speaker.id;
@@ -74,9 +76,22 @@ router.post("/:id/events", (req, res, next) => {
       req.speaker
         .save()
         .then((speaker) => {
+          console.log("Post event with speaker's name");
           res.status(201).send({ event: event, speaker: speaker });
         })
         .catch(next);
+    })
+    .catch(next);
+});
+
+// Get questions by speaker Id
+router.get("/:id/questions", (req, res, next) => {
+  Question.find({ speaker: req.params.id })
+    .populate("user", "image userName")
+    .sort({ createdAt: "desc" })
+    .then((questions) => {
+      console.log("Get questions by eventId");
+      return res.status(200).send(questions);
     })
     .catch(next);
 });

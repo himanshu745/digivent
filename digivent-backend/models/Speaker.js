@@ -17,7 +17,6 @@ const SpeakerSchema = new mongoose.Schema(
     password: { type: String, required: true },
     image: String,
     events: [{ type: mongoose.Schema.Types.ObjectId, ref: "Event" }],
-    questions: [{ type: mongoose.Schema.Types.ObjectId, ref: "Question" }],
   },
   { timestamps: true }
 );

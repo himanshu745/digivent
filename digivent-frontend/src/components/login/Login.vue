@@ -28,7 +28,7 @@
         <input v-model="user.password" type="text" name="password" id="password" />
       </div>
       <div>
-        <input type="submit" value="Log In" />
+        <input type="submit" value="Login" />
       </div>
     </form>
     <form v-else v-on:submit.prevent="checkSpeaker">
@@ -50,7 +50,7 @@
         <input v-model="speaker.password" type="text" name="password" id="password" />
       </div>
       <div>
-        <input type="submit" value="Log In" />
+        <input type="submit" value="Login" />
       </div>
     </form>
   </div>
@@ -59,22 +59,24 @@
 <script>
 import EventBus from "../../eventBus.js";
 export default {
-  data: function () {
+  name: "login",
+
+  data: function() {
     return {
       show: true,
       user: {
         userName: "",
-        password: "",
+        password: ""
       },
       speaker: {
         userName: "",
-        password: "",
+        password: ""
       },
-      errors: [],
+      errors: []
     };
   },
   methods: {
-    checkUser: function (event) {
+    checkUser: function(event) {
       console.log("user");
       event.preventDefault();
       this.errors = [];
@@ -85,7 +87,7 @@ export default {
         this.loginUser(this.user);
       }
     },
-    checkSpeaker: function (event) {
+    checkSpeaker: function(event) {
       console.log("speaker");
       event.preventDefault();
       this.errors = [];
@@ -98,7 +100,7 @@ export default {
     },
     loginUser(user) {
       this.$http.post(`${process.env.VUE_APP_API_URL}users/login`, user).then(
-        function (response) {
+        function(response) {
           if (response.body.userName) {
             localStorage.loggedIn = "yes";
             localStorage.userName = user.userName;
@@ -107,7 +109,7 @@ export default {
             this.$router.push({ path: "/" });
           }
         },
-        function (response) {
+        function(response) {
           this.errors.push(response.body);
         }
       );
@@ -117,7 +119,7 @@ export default {
       this.$http
         .post(`${process.env.VUE_APP_API_URL}speakers/login`, speaker)
         .then(
-          function (response) {
+          function(response) {
             if (response.body.userName) {
               localStorage.loggedIn = "yes";
               localStorage.userName = speaker.userName;
@@ -126,12 +128,12 @@ export default {
               this.$router.push({ path: "/" });
             }
           },
-          function (response) {
+          function(response) {
             this.errors.push(response.body);
           }
         );
-    },
-  },
+    }
+  }
 };
 </script>
 

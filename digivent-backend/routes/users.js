@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const User = require("../models/User.js");
-const Event = require("../models/Event.js");
-
+const Question = require("../models/Question.js");
 
 router.param("id", (req, res, next, id) => {
   User.findById(id)
@@ -15,7 +14,6 @@ router.param("id", (req, res, next, id) => {
     })
     .catch(next);
 });
-
 
 router.get("/", (req, res, next) => {
   User.find({})
@@ -53,30 +51,37 @@ router.delete("/:id", (req, res, next) => {
     res.status(200).send(result);
   });
 });
+
+// Get events details by userId
 router.get("/:id/events", (req, res, next) => {
-  User.find({ events : req.events })
-    .sort({ createdAt: "desc" })
+  User.findById(req.user.id)
+    .populate("events", "name date")
     .then((events) => {
-      return res.status(200).send(events);
+      return res.send(events);
     })
     .catch(next);
 });
 
-router.put("/:id/events", (req, res, next) => {
-  User.findByIdAndUpdate(req.user.id, req.body)
-  .then((event) => {
-    if (!req.user.events) {
-      req.user.events = [];
-    }
-    req.user.events.push(event);
-    req.user
-      .save()
-      .then((user) => {
-        res.status(201).send({ event: event, user: user });
-      })
-      .catch(next);
-})
-  .catch(next);
+// Get questions by user Id
+router.get("/:id/questions", (req, res, next) => {
+  Question.find({ user: req.params.id })
+    .populate("user", "image userName")
+    .sort({ createdAt: "desc" })
+    .then((questions) => {
+      console.log("Get questions by eventId");
+      return res.status(200).send(questions);
+    })
+    .catch(next);
+});
+
+// Book event
+router.put("/:id/event", (req, res, next) => {
+  User.findByIdAndUpdate(req.user.id, { $addToSet: { events: req.body } })
+    .then((user) => {
+      console.log("Add eventId to the user array");
+      return res.status(201).send(user);
+    })
+    .catch(next);
 });
 
 router.post("/login", (req, res, next) => {
@@ -90,6 +95,27 @@ router.post("/login", (req, res, next) => {
         return res.status(422).send("User not found");
       }
       return res.send(user);
+    })
+    .catch(next);
+});
+
+// Post new question by userId
+router.post("/:id/question", (req, res, next) => {
+  const question = new Question(req.body);
+  question.user = req.user.id;
+  question
+    .save()
+    .then((question) => {
+      if (!req.user.questions) {
+        req.user.questions = [];
+      }
+      req.user.questions.push(question);
+      req.user
+        .save()
+        .then((user) => {
+          res.status(201).send({ question: question, user: user });
+        })
+        .catch(next);
     })
     .catch(next);
 });
