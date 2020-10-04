@@ -8,16 +8,21 @@
       <img :src="speaker.image" :alt="speaker.firstName" />
     </div>
     <div class="about">
-      <h3>About:</h3>
+      <h3>About</h3>
       <p>{{speaker.description}}</p>
     </div>
     <div class="quesiton-button">
       <input type="text" value="Questions" />
     </div>
 
-    <div class="events">
-      <img :src="speaker.event" :alt="speaker.events" />
-      <!-- <h2>{{speaker.event.name}}</h2> -->
+    <div class="event__box" v-for="(speaker, i) in filteredSpeaker" :key="i">
+      <router-link v-bind:to="{ name: 'details', params: { speakerId: speaker._id } }">
+        <div class="events__img">
+          <img :src="spekaer.events" />
+        </div>
+        <h2>{{ speaker.event }}</h2>
+        <SpeakerName :eventId="event._id" />
+      </router-link>
     </div>
   </div>
 </template>
@@ -25,25 +30,25 @@
 <script>
 export default {
   name: "speaker-detail",
-  data: function () {
+  data: function() {
     return {
-      speaker: {},
+      speaker: {}
     };
   },
   methods: {
-    getSpeaker: function () {
+    getSpeaker: function() {
       const id = this.$route.params.speakerId;
       console.log(id);
       this.$http
         .get(`${process.env.VUE_APP_API_URL}speakers/${id}`)
-        .then(function (data) {
+        .then(function(data) {
           this.speaker = data.body;
         });
-    },
+    }
   },
-  created: function () {
+  created: function() {
     this.getSpeaker();
-  },
+  }
 };
 </script>
 
