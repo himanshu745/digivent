@@ -22,7 +22,7 @@
 <script>
 export default {
   name: "EventThumbList",
-  props: ["events"]
+  props: ["events"],
 };
 </script>
 

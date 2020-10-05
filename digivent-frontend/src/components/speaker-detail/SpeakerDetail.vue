@@ -4,28 +4,29 @@
       <h3>Host Details</h3>
     </div>
     <div class="speaker-img">
-      <h3>{{speaker.firstName}} {{speaker.lastName}}</h3>
+      <h3>{{ speaker.firstName }} {{ speaker.lastName }}</h3>
       <img :src="speaker.image" :alt="speaker.firstName" />
     </div>
     <div class="about">
       <h3>About</h3>
-      <p>{{speaker.description}}</p>
+      <p>{{ speaker.description }}</p>
     </div>
     <div class="quesiton-button">
       <input type="text" value="Questions" />
     </div>
 
-    <div class="events" v-for="(event, i) in events" :key="i">
+    <div class="events" v-for="event in speaker.events" :key="event._id">
       <router-link
         v-bind:to="{
-            name: 'detail',
-            params: { eventId: event._id },
-          }"
+          name: 'detail',
+          params: { eventId: event._id },
+          path: 'book',
+        }"
       >
         <div class="events-img">
           <img :src="event.image" :alt="event.name" />
         </div>
-        <h2>{{speaker.event.name }}</h2>
+        <h2>{{ event.name }}</h2>
       </router-link>
     </div>
   </div>
@@ -34,12 +35,12 @@
 <script>
 export default {
   name: "speaker-detail",
-  // props: ["events"],
+  props: ["events"],
   data: function() {
     return {
       speaker: {
-        events: []
-      }
+        events: [],
+      },
     };
   },
   methods: {
@@ -51,11 +52,11 @@ export default {
         .then(function(data) {
           this.speaker = data.body;
         });
-    }
+    },
   },
   created: function() {
     this.getSpeaker();
-  }
+  },
 };
 </script>
 

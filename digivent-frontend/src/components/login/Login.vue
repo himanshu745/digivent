@@ -2,11 +2,9 @@
   <div>
     <h1>Log In</h1>
     <div class="login">
-      <div class="formButton">
-        <button @click="show = true">User</button>
+      <button class="login_button" @click="show = true">Guest Login</button>
 
-        <button @click="show = false">Speaker</button>
-      </div>
+      <button class="login_button" @click="show = false">Admin Login</button>
     </div>
 
     <form v-if="show" class="user" v-on:submit.prevent="checkUser">
@@ -25,10 +23,20 @@
       </div>
       <div>
         <label for="pasword">Password</label>
-        <input v-model="user.password" type="text" name="password" id="password" />
+        <input
+          v-model="user.password"
+          type="text"
+          name="password"
+          id="password"
+        />
       </div>
       <div>
         <input type="submit" value="Login" />
+      </div>
+      <div class="new-account">
+        <router-link v-bind:to="{ name: 'register-user' }"
+          >or Create Account
+        </router-link>
       </div>
     </form>
     <form v-else v-on:submit.prevent="checkSpeaker">
@@ -43,14 +51,29 @@
 
       <div>
         <label for="username">Speaker Name</label>
-        <input v-model="speaker.userName" type="text" name="name" id="username" />
+        <input
+          v-model="speaker.userName"
+          type="text"
+          name="name"
+          id="username"
+        />
       </div>
       <div>
         <label for="pasword">Password</label>
-        <input v-model="speaker.password" type="text" name="password" id="password" />
+        <input
+          v-model="speaker.password"
+          type="text"
+          name="password"
+          id="password"
+        />
       </div>
       <div>
         <input type="submit" value="Login" />
+      </div>
+      <div class="new-account">
+        <router-link v-bind:to="{ name: 'register-speaker' }"
+          >or Create Account
+        </router-link>
       </div>
     </form>
   </div>
@@ -66,13 +89,13 @@ export default {
       show: true,
       user: {
         userName: "",
-        password: ""
+        password: "",
       },
       speaker: {
         userName: "",
-        password: ""
+        password: "",
       },
-      errors: []
+      errors: [],
     };
   },
   methods: {
@@ -132,11 +155,52 @@ export default {
             this.errors.push(response.body);
           }
         );
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss" scoped>
 @import "@/style/_variables.scss";
+h1 {
+  padding-top: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  @include heading-large;
+  color: black;
+}
+.login {
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+.login_button {
+  background: rgba(0, 0, 0, 0);
+  border: 0;
+  padding: 1rem;
+  margin: 1rem;
+  font-size: 23px;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 14px;
+  line-height: 16px;
+  text-decoration-line: underline;
+  text-decoration-style: solid;
+}
+form {
+  display: inline;
+  text-align: center;
+}
+label {
+  color: #bdbdbd;
+  font-size: 15px;
+}
+input {
+  display: flex;
+  justify-items: center;
+  width: 80%;
+}
 </style>
