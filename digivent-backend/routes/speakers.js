@@ -2,6 +2,7 @@ const router = require("express").Router();
 const Speaker = require("../models/Speaker.js");
 const Event = require("../models/Event.js");
 const Question = require("../models/Question.js");
+const { populate } = require("../models/Speaker.js");
 
 router.param("id", (req, res, next, id) => {
   Speaker.findById(id)
@@ -26,7 +27,14 @@ router.get("/", (req, res, next) => {
 });
 
 router.get("/:id", (req, res, next) => {
-  res.status(200).send(req.speaker);
+  Speaker.findById(req.speaker.id)
+    .populate("events")
+    .sort({ createdAt: "desc" })
+    .then((speakers) => {
+      return res.status(200).send(speakers);
+    })
+    .catch(next);
+  // res.status(200).send(req.speaker);
 });
 
 router.post("/", (req, res, next) => {
