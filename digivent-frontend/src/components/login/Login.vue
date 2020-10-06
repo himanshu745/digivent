@@ -23,20 +23,13 @@
       </div>
       <div>
         <label for="pasword">Password</label>
-        <input
-          v-model="user.password"
-          type="text"
-          name="password"
-          id="password"
-        />
+        <input v-model="user.password" type="text" name="password" id="password" />
       </div>
       <div>
-        <input type="submit" value="Login" />
+        <input class="login-button" type="submit" value="Login" />
       </div>
       <div class="new-account">
-        <router-link v-bind:to="{ name: 'register-user' }"
-          >or Create Account
-        </router-link>
+        <router-link v-bind:to="{ name: 'register-user' }">or Create Account</router-link>
       </div>
     </form>
     <form v-else v-on:submit.prevent="checkSpeaker">
@@ -51,29 +44,17 @@
 
       <div>
         <label for="username">Speaker Name</label>
-        <input
-          v-model="speaker.userName"
-          type="text"
-          name="name"
-          id="username"
-        />
+        <input v-model="speaker.userName" type="text" name="name" id="username" />
       </div>
       <div>
         <label for="pasword">Password</label>
-        <input
-          v-model="speaker.password"
-          type="text"
-          name="password"
-          id="password"
-        />
+        <input v-model="speaker.password" type="text" name="password" id="password" />
       </div>
       <div>
-        <input type="submit" value="Login" />
+        <input class="login-button" type="submit" value="Login" />
       </div>
       <div class="new-account">
-        <router-link v-bind:to="{ name: 'register-speaker' }"
-          >or Create Account
-        </router-link>
+        <router-link v-bind:to="{ name: 'register-speaker' }">or Create Account</router-link>
       </div>
     </form>
   </div>
@@ -84,7 +65,7 @@ import EventBus from "../../eventBus.js";
 export default {
   name: "login",
 
-  data: function() {
+  data: function () {
     return {
       show: true,
       user: {
@@ -99,7 +80,7 @@ export default {
     };
   },
   methods: {
-    checkUser: function(event) {
+    checkUser: function (event) {
       console.log("user");
       event.preventDefault();
       this.errors = [];
@@ -110,7 +91,7 @@ export default {
         this.loginUser(this.user);
       }
     },
-    checkSpeaker: function(event) {
+    checkSpeaker: function (event) {
       console.log("speaker");
       event.preventDefault();
       this.errors = [];
@@ -123,7 +104,7 @@ export default {
     },
     loginUser(user) {
       this.$http.post(`${process.env.VUE_APP_API_URL}users/login`, user).then(
-        function(response) {
+        function (response) {
           if (response.body.userName) {
             localStorage.loggedIn = "yes";
             localStorage.userName = user.userName;
@@ -132,7 +113,7 @@ export default {
             this.$router.push({ path: "/" });
           }
         },
-        function(response) {
+        function (response) {
           this.errors.push(response.body);
         }
       );
@@ -142,7 +123,7 @@ export default {
       this.$http
         .post(`${process.env.VUE_APP_API_URL}speakers/login`, speaker)
         .then(
-          function(response) {
+          function (response) {
             if (response.body.userName) {
               localStorage.loggedIn = "yes";
               localStorage.userName = speaker.userName;
@@ -151,7 +132,7 @@ export default {
               this.$router.push({ path: "/" });
             }
           },
-          function(response) {
+          function (response) {
             this.errors.push(response.body);
           }
         );
@@ -197,10 +178,22 @@ form {
 label {
   color: #bdbdbd;
   font-size: 15px;
+  padding-left: 5rem;
+  width: 80%;
+  display: flex;
 }
 input {
   display: flex;
-  justify-items: center;
   width: 80%;
+  width: 80%;
+  margin-left: 4rem;
+  margin-top: 1.5rem;
+  border: 0;
+  text-decoration-line: underline;
+}
+.login-button {
+  @include buttonprimary;
+  margin-left: 17rem;
+  margin-bottom: 3.5rem;
 }
 </style>

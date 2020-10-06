@@ -26,18 +26,13 @@ $natural-light: #edf5e1;
 
 @mixin buttonprimary {
   display: flex;
-  flex-direction: column;
-  padding: 22px 32px;
-  // position: absolute;
-  // height: 65px;
-  // left: 57px;
-  // right: 57px;
-  // bottom: 367px;
-  background: $secondary;
-  border-radius: 20px;
+  padding: 13px 28px;
+  background: #5cdb95;
+  border-radius: 12px;
   text-align: center;
   font-weight: 400;
   color: white;
+  width: 6rem;
 }
 
 @mixin secondarybutton {
