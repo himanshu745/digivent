@@ -23,13 +23,21 @@
       </div>
       <div>
         <label for="pasword">Password</label>
-        <input v-model="user.password" type="text" name="password" id="password" />
+        <input
+          v-model="user.password"
+          type="text"
+          name="password"
+          id="password"
+        />
       </div>
       <div>
         <input class="login-button" type="submit" value="Login" />
       </div>
       <div class="new-account">
-        <router-link v-bind:to="{ name: 'register-user' }">or Create Account</router-link>
+        <router-link v-bind:to="{ name: 'register-user' }">
+          or
+          <span class="create">Create Account</span>
+        </router-link>
       </div>
     </form>
     <form v-else v-on:submit.prevent="checkSpeaker">
@@ -43,18 +51,31 @@
       </div>
 
       <div>
-        <label for="username">Speaker Name</label>
-        <input v-model="speaker.userName" type="text" name="name" id="username" />
+        <label for="username">User Name</label>
+        <input
+          v-model="speaker.userName"
+          type="text"
+          name="name"
+          id="username"
+        />
       </div>
       <div>
         <label for="pasword">Password</label>
-        <input v-model="speaker.password" type="text" name="password" id="password" />
+        <input
+          v-model="speaker.password"
+          type="text"
+          name="password"
+          id="password"
+        />
       </div>
       <div>
         <input class="login-button" type="submit" value="Login" />
       </div>
       <div class="new-account">
-        <router-link v-bind:to="{ name: 'register-speaker' }">or Create Account</router-link>
+        <router-link v-bind:to="{ name: 'register-speaker' }">
+          or
+          <span class="create">Create Account</span>
+        </router-link>
       </div>
     </form>
   </div>
@@ -65,7 +86,7 @@ import EventBus from "../../eventBus.js";
 export default {
   name: "login",
 
-  data: function () {
+  data: function() {
     return {
       show: true,
       user: {
@@ -80,7 +101,7 @@ export default {
     };
   },
   methods: {
-    checkUser: function (event) {
+    checkUser: function(event) {
       console.log("user");
       event.preventDefault();
       this.errors = [];
@@ -91,7 +112,7 @@ export default {
         this.loginUser(this.user);
       }
     },
-    checkSpeaker: function (event) {
+    checkSpeaker: function(event) {
       console.log("speaker");
       event.preventDefault();
       this.errors = [];
@@ -104,7 +125,7 @@ export default {
     },
     loginUser(user) {
       this.$http.post(`${process.env.VUE_APP_API_URL}users/login`, user).then(
-        function (response) {
+        function(response) {
           if (response.body.userName) {
             localStorage.loggedIn = "yes";
             localStorage.userName = user.userName;
@@ -113,7 +134,7 @@ export default {
             this.$router.push({ path: "/" });
           }
         },
-        function (response) {
+        function(response) {
           this.errors.push(response.body);
         }
       );
@@ -123,7 +144,7 @@ export default {
       this.$http
         .post(`${process.env.VUE_APP_API_URL}speakers/login`, speaker)
         .then(
-          function (response) {
+          function(response) {
             if (response.body.userName) {
               localStorage.loggedIn = "yes";
               localStorage.userName = speaker.userName;
@@ -132,7 +153,7 @@ export default {
               this.$router.push({ path: "/" });
             }
           },
-          function (response) {
+          function(response) {
             this.errors.push(response.body);
           }
         );
@@ -168,7 +189,8 @@ h1 {
   font-weight: 300;
   font-size: 14px;
   line-height: 16px;
-  text-decoration-line: underline;
+  width: 9rem;
+  border-bottom: solid 4px #bdbdbd;
   text-decoration-style: solid;
 }
 form {
@@ -178,7 +200,7 @@ form {
 label {
   color: #bdbdbd;
   font-size: 15px;
-  padding-left: 5rem;
+  padding-left: 2rem;
   width: 80%;
   display: flex;
 }
@@ -186,14 +208,27 @@ input {
   display: flex;
   width: 80%;
   width: 80%;
-  margin-left: 4rem;
-  margin-top: 1.5rem;
+  margin-left: 2rem;
+  margin-top: 0.5rem;
+  padding: 15px;
   border: 0;
-  text-decoration-line: underline;
+  border-bottom: solid 2px #bdbdbd;
+  margin-bottom: 0.3rem;
 }
 .login-button {
   @include buttonprimary;
-  margin-left: 17rem;
-  margin-bottom: 3.5rem;
+  width: 15rem;
+  margin-left: 4rem;
+  margin-bottom: 2rem;
+  margin-top: 2rem;
+  font-family: Roboto;
+  font-style: normal;
+  font-weight: 300;
+  font-size: 15px;
+  line-height: 20px;
+}
+
+.create {
+  color: #5cdb95;
 }
 </style>
