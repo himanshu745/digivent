@@ -12,7 +12,7 @@
             <img :src="event.image" :alt="event.name" />
           </div>
           <h2>{{ event.name }}</h2>
-          <h3>{{ event.speaker.firstName }} {{ event.speaker.lastName }}</h3>
+          <h4>{{ event.speaker.firstName }} {{ event.speaker.lastName }}</h4>
         </router-link>
       </div>
     </div>
@@ -29,21 +29,34 @@ export default {
 <style lang="scss">
 @import "@/style/_variables.scss";
 .contents {
+  padding-bottom: 24px;
   display: flex;
   white-space: nowrap;
   overflow-x: auto;
   overflow-y: hidden;
   &__box {
-    margin: 20px;
+    margin-right: 20px;
   }
   &__img {
+    border-radius: 20px;
     height: 400px;
     width: 300px;
+    margin: 8px 0;
     overflow: hidden;
     img {
       height: 100%;
       width: auto;
     }
   }
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background-color: white;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $secondary;
+  border-radius: 20px;
 }
 </style>

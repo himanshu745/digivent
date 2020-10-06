@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import VueResource from "vue-resource";
 import VueRouter from "vue-router";
+import vuetify from './plugins/vuetify';
 
 Vue.use(VueResource);
 Vue.use(VueRouter);
@@ -77,14 +78,26 @@ const routes = [
   {
     name: "my-questions",
     path: "/my-questions",
-    component: () => import("./components/question/MyQuestions"),
+    component: () => import("./components/my-question/MyQuestions"),
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem("userName")) return next("login");
+      next();
+    },
   },
   {
     name: "speaker-detail",
     path: "/speaker-detail",
     component: () => import("./components/speaker-detail/SpeakerDetail.vue"),
     props: true,
-  },
+  }
+  
+  ,
+  {
+    name: "my-events",
+    path: "/my-events",
+    component: () => import("./components/my-event/MyEvent.vue"),
+    props: true,
+  }
 ];
 
 const router = new VueRouter({
@@ -96,5 +109,6 @@ Vue.config.productionTip = false;
 
 new Vue({
   render: (h) => h(App),
-  router,
+  vuetify,
+  router
 }).$mount("#app");

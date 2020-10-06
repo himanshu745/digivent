@@ -27,7 +27,7 @@
 <script>
 export default {
   name: "book",
-  data: function() {
+  data: function () {
     return {
       event: {
         speaker: {
@@ -38,7 +38,7 @@ export default {
       },
     };
   },
-  mounted: function() {
+  mounted: function () {
     this.event = this.$attrs.event;
   },
 };

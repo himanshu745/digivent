@@ -63,6 +63,7 @@ router.delete("/:id", (req, res, next) => {
 
 router.get("/:id/events", (req, res, next) => {
   Event.find({ speaker: req.speaker.id })
+  .populate("speaker")
     .sort({ createdAt: "desc" })
     .then((events) => {
       return res.status(200).send(events);
@@ -96,6 +97,7 @@ router.post("/:id/events", (req, res, next) => {
 router.get("/:id/questions", (req, res, next) => {
   Question.find({ speaker: req.params.id })
     .populate("user", "image userName")
+    .populate("event", "name")
     .sort({ createdAt: "desc" })
     .then((questions) => {
       console.log("Get questions by eventId");

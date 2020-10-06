@@ -46,7 +46,7 @@
       </div>
     </div>
 
-    <a v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut" href>Log Out</a>
+    <a v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut">Log Out</a>
   </div>
 </template>
 
@@ -54,7 +54,7 @@
 export default {
   name: "profile",
 
-  data: function() {
+  data: function () {
     return {
       event: {},
       loggedIn: "no",
@@ -63,13 +63,13 @@ export default {
       speaker: {},
     };
   },
-  created: function() {
+  created: function () {
     if (localStorage.speakerId) {
       this.isSpeaker = "yes";
       const id = localStorage.speakerId;
       this.$http
         .get(`${process.env.VUE_APP_API_URL}speakers/${id}`)
-        .then(function(data) {
+        .then(function (data) {
           this.speaker = data.body;
         });
     } else {
@@ -77,7 +77,7 @@ export default {
       console.log(id);
       this.$http
         .get(`${process.env.VUE_APP_API_URL}users/${id}`)
-        .then(function(data) {
+        .then(function (data) {
           this.user = data.body;
         });
     }

@@ -55,9 +55,9 @@ router.delete("/:id", (req, res, next) => {
 // Get events details by userId
 router.get("/:id/events", (req, res, next) => {
   User.findById(req.user.id)
-    .populate("events", "name date")
-    .then((events) => {
-      return res.send(events);
+    .populate("events")
+    .then((user) => {
+      return res.send(user);
     })
     .catch(next);
 });
@@ -66,6 +66,7 @@ router.get("/:id/events", (req, res, next) => {
 router.get("/:id/questions", (req, res, next) => {
   Question.find({ user: req.params.id })
     .populate("user", "image userName")
+    .populate("event", "name")
     .sort({ createdAt: "desc" })
     .then((questions) => {
       console.log("Get questions by eventId");

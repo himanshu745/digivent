@@ -20,8 +20,8 @@ mongoose.connect(process.env.MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false,
+  useCreateIndex: true,
 });
-// mongoose.set("useCreateIndex", true);
 
 mongoose.connection.on("open", function (ref) {
   console.log("MongoDB connected");

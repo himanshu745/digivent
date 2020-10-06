@@ -38,7 +38,7 @@
 export default {
   name: "post-question",
 
-  data: function() {
+  data: function () {
     return {
       userName: String,
       question: {
@@ -55,12 +55,12 @@ export default {
     };
   },
   methods: {
-    checkForm: function() {
+    checkForm: function () {
       if (this.question.body) {
         this.createQuestion(this.question);
       }
     },
-    createQuestion: function(question) {
+    createQuestion: function (question) {
       const userId = localStorage.userId;
       console.log(question);
       this.$http
@@ -68,7 +68,7 @@ export default {
           `${process.env.VUE_APP_API_URL}users/${userId}/question`,
           question
         )
-        .then(function() {
+        .then(function () {
           this.$router.push({
             name: "question",
             params: { eventId: this.question.event._id },
@@ -76,12 +76,12 @@ export default {
         });
     },
   },
-  mounted: function() {
+  mounted: function () {
     this.userName = localStorage.userName;
     const eventId = this.$route.params.eventId;
     this.$http
       .get(`${process.env.VUE_APP_API_URL}events/${eventId}`)
-      .then(function(data) {
+      .then(function (data) {
         this.question.event = data.body;
         this.question.speaker = data.body.speaker;
       });
@@ -91,15 +91,15 @@ export default {
 
 <style lang="scss">
 @import "@/style/_variables.scss";
-.flexbox {
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-.thumb {
-  @include thumb-img;
-  &--b {
-    @include thumb-img--b;
-  }
-}
+// .flexbox {
+//   display: flex;
+//   align-items: center;
+//   overflow: hidden;
+// }
+// .thumb {
+//   @include thumb-img;
+//   &--b {
+//     @include thumb-img--b;
+//   }
+// }
 </style>

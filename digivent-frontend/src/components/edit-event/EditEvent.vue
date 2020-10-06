@@ -63,7 +63,7 @@
 export default {
   name: "edit",
 
-  data: function() {
+  data: function () {
     return {
       mode: "Add Event",
       editing: false,
@@ -83,7 +83,7 @@ export default {
     };
   },
   methods: {
-    checkForm: function() {
+    checkForm: function () {
       if (
         this.event.name &&
         this.event.description &&
@@ -100,7 +100,7 @@ export default {
       }
     },
 
-    createEvent: function(event) {
+    createEvent: function (event) {
       const speakerId = localStorage.speakerId;
       console.log(event);
       this.$http
@@ -108,24 +108,24 @@ export default {
           `${process.env.VUE_APP_API_URL}speakers/${speakerId}/events`,
           event
         )
-        .then(function() {
+        .then(function () {
           this.$router.push({ path: "/" });
         });
     },
 
-    editEvent: function(event) {
+    editEvent: function (event) {
       this.$http
         .put(`${process.env.VUE_APP_API_URL}events/${event._id}`, event)
-        .then(function() {
+        .then(function () {
           this.$router.push({ path: "/" });
         });
     },
   },
-  created: function() {
+  created: function () {
     const speakerId = localStorage.speakerId;
     this.$http
       .get(`${process.env.VUE_APP_API_URL}speakers/${speakerId}`)
-      .then(function(data) {
+      .then(function (data) {
         this.event.speaker = data.body;
       });
     const eventId = this.$route.params.eventId;
@@ -134,7 +134,7 @@ export default {
       this.mode = "Edit Event";
       this.$http
         .get(`${process.env.VUE_APP_API_URL}events/${eventId}`)
-        .then(function(data) {
+        .then(function (data) {
           this.event = data.body;
         });
     }
@@ -144,15 +144,15 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/style/_variables.scss";
-.flexbox {
-  display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-.thumb {
-  @include thumb-img;
-  &--b {
-    @include thumb-img--b;
-  }
-}
+// .flexbox {
+//   display: flex;
+//   align-items: center;
+//   overflow: hidden;
+// }
+// .thumb {
+//   @include thumb-img;
+//   &--b {
+//     @include thumb-img--b;
+//   }
+// }
 </style>

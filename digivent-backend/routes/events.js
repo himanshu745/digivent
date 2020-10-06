@@ -3,7 +3,6 @@ const Event = require("../models/Event");
 const Speaker = require("../models/Speaker.js");
 const Question = require("../models/Question.js");
 
-
 router.param("id", (req, res, next, id) => {
   Event.findById(id)
     .then((event) => {
@@ -55,6 +54,7 @@ router.get("/:id/speaker", (req, res, next) => {
 router.get("/:id/questions", (req, res, next) => {
   Question.find({ event: req.event.id })
     .populate("user", "image userName")
+    .populate("event", "name")
     .sort({ createdAt: "desc" })
     .then((questions) => {
       console.log("Get questions by eventId");

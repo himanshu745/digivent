@@ -6,8 +6,7 @@
 
       <button class="login_button" @click="show = false">Admin Login</button>
     </div>
-
-    <form v-if="show" class="user" v-on:submit.prevent="checkUser">
+    <v-form v-if="show" class="user" v-on:submit.prevent="checkUser">
       <div v-if="errors.length">
         <p>
           <b>Please correct the following</b>
@@ -16,12 +15,25 @@
           <li>{{ error }}</li>
         </ul>
       </div>
-
-      <div>
+      <v-text-field
+        v-model="user.userName"
+        :counter="10"
+        label="User Name"
+        id="username"
+        required
+      ></v-text-field>
+      <!-- <div>
         <label for="username">User Name</label>
         <input v-model="user.userName" type="text" name="name" id="username" />
-      </div>
-      <div>
+      </div> -->
+      <v-text-field
+        v-model="user.password"
+        :type="'password'"
+        name="password"
+        label="Password"
+      ></v-text-field>
+
+      <!-- <div>
         <label for="pasword">Password</label>
         <input
           v-model="user.password"
@@ -29,17 +41,17 @@
           name="password"
           id="password"
         />
-      </div>
-      <div>
-        <input class="login-button" type="submit" value="Login" />
-      </div>
+      </div> -->
+      <!-- <input class="login-button" type="submit" value="Login" /> -->
+      <v-btn class="login-button" type="submit" color="#5cdb95"> Login </v-btn>
+
       <div class="new-account">
         <router-link v-bind:to="{ name: 'register-user' }">
           or
           <span class="create">Create Account</span>
         </router-link>
       </div>
-    </form>
+    </v-form>
     <form v-else v-on:submit.prevent="checkSpeaker">
       <div v-if="errors.length">
         <p>
@@ -50,7 +62,14 @@
         </ul>
       </div>
 
-      <div>
+      <v-text-field
+        v-model="speaker.password"
+        :counter="10"
+        label="User Name"
+        id="username"
+        required
+      ></v-text-field>
+      <!-- <div>
         <label for="username">User Name</label>
         <input
           v-model="speaker.userName"
@@ -58,8 +77,15 @@
           name="name"
           id="username"
         />
-      </div>
-      <div>
+      </div> -->
+
+      <v-text-field
+        v-model="speaker.password"
+        :type="'password'"
+        name="password"
+        label="Password"
+      ></v-text-field>
+      <!-- <div>
         <label for="pasword">Password</label>
         <input
           v-model="speaker.password"
@@ -67,10 +93,10 @@
           name="password"
           id="password"
         />
-      </div>
-      <div>
-        <input class="login-button" type="submit" value="Login" />
-      </div>
+      </div> -->
+      <v-btn class="login-button" type="submit" value="Login" />
+
+      <!-- <input class="login-button" type="submit" value="Login" /> -->
       <div class="new-account">
         <router-link v-bind:to="{ name: 'register-speaker' }">
           or
@@ -215,19 +241,10 @@ input {
   border-bottom: solid 2px #bdbdbd;
   margin-bottom: 0.3rem;
 }
+
 .login-button {
   @include buttonprimary;
-  width: 15rem;
-  margin-left: 4rem;
-  margin-bottom: 2rem;
-  margin-top: 2rem;
-  font-family: Roboto;
-  font-style: normal;
-  font-weight: 300;
-  font-size: 15px;
-  line-height: 20px;
 }
-
 .create {
   color: #5cdb95;
 }
