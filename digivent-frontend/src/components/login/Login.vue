@@ -15,23 +15,12 @@
           <li>{{ error }}</li>
         </ul>
       </div>
-      <v-text-field
-        v-model="user.userName"
-        :counter="10"
-        label="User Name"
-        id="username"
-        required
-      ></v-text-field>
+      <v-text-field v-model="user.userName" :counter="10" label="User Name" id="username" required></v-text-field>
       <!-- <div>
         <label for="username">User Name</label>
         <input v-model="user.userName" type="text" name="name" id="username" />
-      </div> -->
-      <v-text-field
-        v-model="user.password"
-        :type="'password'"
-        name="password"
-        label="Password"
-      ></v-text-field>
+      </div>-->
+      <v-text-field v-model="user.password" :type="'password'" name="password" label="Password"></v-text-field>
 
       <!-- <div>
         <label for="pasword">Password</label>
@@ -41,9 +30,20 @@
           name="password"
           id="password"
         />
-      </div> -->
+      </div>-->
       <!-- <input class="login-button" type="submit" value="Login" /> -->
-      <v-btn class="login-button" type="submit" color="#5cdb95"> Login </v-btn>
+      <v-row justify="center">
+        <v-btn
+          class="`d-flex align-center flex-column mb-6` login-button"
+          type="submit"
+          color="#5cdb95"
+          elevation="18"
+          align="center"
+          justify="space-around"
+          width="290px"
+          dark
+        >Login</v-btn>
+      </v-row>
 
       <div class="new-account">
         <router-link v-bind:to="{ name: 'register-user' }">
@@ -77,14 +77,10 @@
           name="name"
           id="username"
         />
-      </div> -->
+      </div>-->
 
-      <v-text-field
-        v-model="speaker.password"
-        :type="'password'"
-        name="password"
-        label="Password"
-      ></v-text-field>
+      <v-text-field v-model="speaker.password" :type="'password'" name="password" label="Password"></v-text-field>
+
       <!-- <div>
         <label for="pasword">Password</label>
         <input
@@ -93,8 +89,15 @@
           name="password"
           id="password"
         />
-      </div> -->
-      <v-btn class="login-button" type="submit" value="Login" />
+      </div>-->
+      <v-row justify="center">
+        <v-btn
+          class="`d-flex align-center flex-column mb-6`login-button"
+          type="submit"
+          color="#5cdb95"
+          text="white"
+        >Login</v-btn>
+      </v-row>
 
       <!-- <input class="login-button" type="submit" value="Login" /> -->
       <div class="new-account">
@@ -112,7 +115,7 @@ import EventBus from "../../eventBus.js";
 export default {
   name: "login",
 
-  data: function() {
+  data: function () {
     return {
       show: true,
       user: {
@@ -127,7 +130,7 @@ export default {
     };
   },
   methods: {
-    checkUser: function(event) {
+    checkUser: function (event) {
       console.log("user");
       event.preventDefault();
       this.errors = [];
@@ -138,7 +141,7 @@ export default {
         this.loginUser(this.user);
       }
     },
-    checkSpeaker: function(event) {
+    checkSpeaker: function (event) {
       console.log("speaker");
       event.preventDefault();
       this.errors = [];
@@ -151,7 +154,7 @@ export default {
     },
     loginUser(user) {
       this.$http.post(`${process.env.VUE_APP_API_URL}users/login`, user).then(
-        function(response) {
+        function (response) {
           if (response.body.userName) {
             localStorage.loggedIn = "yes";
             localStorage.userName = user.userName;
@@ -160,7 +163,7 @@ export default {
             this.$router.push({ path: "/" });
           }
         },
-        function(response) {
+        function (response) {
           this.errors.push(response.body);
         }
       );
@@ -170,7 +173,7 @@ export default {
       this.$http
         .post(`${process.env.VUE_APP_API_URL}speakers/login`, speaker)
         .then(
-          function(response) {
+          function (response) {
             if (response.body.userName) {
               localStorage.loggedIn = "yes";
               localStorage.userName = speaker.userName;
@@ -179,7 +182,7 @@ export default {
               this.$router.push({ path: "/" });
             }
           },
-          function(response) {
+          function (response) {
             this.errors.push(response.body);
           }
         );
@@ -219,6 +222,11 @@ h1 {
   border-bottom: solid 4px #bdbdbd;
   text-decoration-style: solid;
 }
+.login_button:hover {
+  border-bottom: solid 4px #5cdb95;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.19);
+  font-weight: 500;
+}
 form {
   display: inline;
   text-align: center;
@@ -243,9 +251,17 @@ input {
 }
 
 .login-button {
-  @include buttonprimary;
+  display: flex;
+  justify-content: center;
+}
+
+.new-account {
+  margin-top: 5rem;
 }
 .create {
   color: #5cdb95;
+}
+.input-box {
+  margin: 0 100px;
 }
 </style>
