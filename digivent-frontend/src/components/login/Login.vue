@@ -6,107 +6,100 @@
 
       <button class="login_button" @click="show = false">Admin Login</button>
     </div>
-    <v-form v-if="show" class="user" v-on:submit.prevent="checkUser">
-      <div v-if="errors.length">
-        <p>
-          <b>Please correct the following</b>
-        </p>
-        <ul v-for="(error, index) in errors" v-bind:key="index">
-          <li>{{ error }}</li>
-        </ul>
-      </div>
-      <v-text-field v-model="user.userName" :counter="10" label="User Name" id="username" required></v-text-field>
-      <!-- <div>
-        <label for="username">User Name</label>
-        <input v-model="user.userName" type="text" name="name" id="username" />
-      </div>-->
-      <v-text-field v-model="user.password" :type="'password'" name="password" label="Password"></v-text-field>
-
-      <!-- <div>
-        <label for="pasword">Password</label>
-        <input
-          v-model="user.password"
-          type="text"
-          name="password"
-          id="password"
-        />
-      </div>-->
-      <!-- <input class="login-button" type="submit" value="Login" /> -->
-      <v-row justify="center">
-        <v-btn
-          class="`d-flex align-center flex-column mb-6` login-button"
-          type="submit"
-          color="#5cdb95"
-          elevation="18"
-          align="center"
-          justify="space-around"
-          width="290px"
-          dark
-        >Login</v-btn>
-      </v-row>
-
-      <div class="new-account">
-        <router-link v-bind:to="{ name: 'register-user' }">
-          or
-          <span class="create">Create Account</span>
-        </router-link>
-      </div>
-    </v-form>
-    <form v-else v-on:submit.prevent="checkSpeaker">
-      <div v-if="errors.length">
-        <p>
-          <b>Please correct the following</b>
-        </p>
-        <ul v-for="(error, index) in errors" v-bind:key="index">
-          <li>{{ error }}</li>
-        </ul>
-      </div>
-
-      <v-text-field
-        v-model="speaker.password"
-        :counter="10"
-        label="User Name"
-        id="username"
-        required
-      ></v-text-field>
-      <!-- <div>
-        <label for="username">User Name</label>
-        <input
-          v-model="speaker.userName"
-          type="text"
-          name="name"
+    <v-flex class="form-box">
+      <v-form v-if="show" class="user" v-on:submit.prevent="checkUser">
+        <div v-if="errors.length">
+          <p>
+            <b>Please correct the following</b>
+          </p>
+          <ul v-for="(error, index) in errors" v-bind:key="index">
+            <li>{{ error }}</li>
+          </ul>
+        </div>
+        <v-text-field
+          v-model="user.userName"
+          :counter="10"
+          label="User Name"
           id="username"
-        />
-      </div>-->
+          required
+        ></v-text-field>
 
-      <v-text-field v-model="speaker.password" :type="'password'" name="password" label="Password"></v-text-field>
-
-      <!-- <div>
-        <label for="pasword">Password</label>
-        <input
-          v-model="speaker.password"
-          type="text"
+        <v-text-field
+          v-model="user.password"
+          :type="'password'"
           name="password"
-          id="password"
-        />
-      </div>-->
-      <v-row justify="center">
-        <v-btn
-          class="`d-flex align-center flex-column mb-6`login-button"
-          type="submit"
-          color="#5cdb95"
-          text="white"
-        >Login</v-btn>
-      </v-row>
+          label="Password"
+        ></v-text-field>
 
-      <!-- <input class="login-button" type="submit" value="Login" /> -->
-      <div class="new-account">
-        <router-link v-bind:to="{ name: 'register-speaker' }">
-          or
-          <span class="create">Create Account</span>
-        </router-link>
-      </div>
-    </form>
+        <v-row justify="center">
+          <v-btn
+            class="`d-flex align-center flex-column mb-6` login-button"
+            type="submit"
+            color="#5cdb95"
+            elevation="18"
+            align="center"
+            justify="space-around"
+            width="290px"
+            dark
+            >Login</v-btn
+          >
+        </v-row>
+
+        <div class="new-account">
+          <router-link v-bind:to="{ name: 'register-user' }">
+            or
+            <span class="create">Create Account</span>
+          </router-link>
+        </div>
+      </v-form>
+
+      <v-form v-else v-on:submit.prevent="checkSpeaker">
+        <div v-if="errors.length">
+          <p>
+            <b>Please correct the following</b>
+          </p>
+          <ul v-for="(error, index) in errors" v-bind:key="index">
+            <li>{{ error }}</li>
+          </ul>
+        </div>
+
+        <v-text-field
+          v-model="speaker.password"
+          :counter="10"
+          label="User Name"
+          id="username"
+          required
+        ></v-text-field>
+
+        <v-text-field
+          v-model="speaker.password"
+          :type="'password'"
+          name="password"
+          label="Password"
+        ></v-text-field>
+
+        <v-row justify="center">
+          <v-btn
+            class="`d-flex align-center flex-column mb-6` login-button"
+            type="submit"
+            color="#5cdb95"
+            elevation="18"
+            align="center"
+            justify="space-around"
+            width="290px"
+            dark
+            >Login</v-btn
+          >
+        </v-row>
+
+        <div class="new-account">
+          <router-link v-bind:to="{ name: 'register-speaker' }">
+            or
+            <span class="create">Create Account</span>
+          </router-link>
+        </div>
+      </v-form>
+    </v-flex>
   </div>
 </template>
 
@@ -115,7 +108,7 @@ import EventBus from "../../eventBus.js";
 export default {
   name: "login",
 
-  data: function () {
+  data: function() {
     return {
       show: true,
       user: {
@@ -130,7 +123,7 @@ export default {
     };
   },
   methods: {
-    checkUser: function (event) {
+    checkUser: function(event) {
       console.log("user");
       event.preventDefault();
       this.errors = [];
@@ -141,7 +134,7 @@ export default {
         this.loginUser(this.user);
       }
     },
-    checkSpeaker: function (event) {
+    checkSpeaker: function(event) {
       console.log("speaker");
       event.preventDefault();
       this.errors = [];
@@ -154,7 +147,7 @@ export default {
     },
     loginUser(user) {
       this.$http.post(`${process.env.VUE_APP_API_URL}users/login`, user).then(
-        function (response) {
+        function(response) {
           if (response.body.userName) {
             localStorage.loggedIn = "yes";
             localStorage.userName = user.userName;
@@ -163,7 +156,7 @@ export default {
             this.$router.push({ path: "/" });
           }
         },
-        function (response) {
+        function(response) {
           this.errors.push(response.body);
         }
       );
@@ -173,7 +166,7 @@ export default {
       this.$http
         .post(`${process.env.VUE_APP_API_URL}speakers/login`, speaker)
         .then(
-          function (response) {
+          function(response) {
             if (response.body.userName) {
               localStorage.loggedIn = "yes";
               localStorage.userName = speaker.userName;
@@ -182,7 +175,7 @@ export default {
               this.$router.push({ path: "/" });
             }
           },
-          function (response) {
+          function(response) {
             this.errors.push(response.body);
           }
         );
@@ -202,16 +195,15 @@ h1 {
   color: black;
 }
 .login {
-  padding: 2rem;
+  padding: 2rem 0;
   display: flex;
   justify-content: center;
-  padding: 2rem;
 }
 .login_button {
   background: rgba(0, 0, 0, 0);
   border: 0;
-  padding: 1rem;
-  margin: 1rem;
+  padding: 1rem 0;
+  margin: 1rem 0;
   font-size: 23px;
   font-family: Roboto;
   font-style: normal;
@@ -222,9 +214,8 @@ h1 {
   border-bottom: solid 4px #bdbdbd;
   text-decoration-style: solid;
 }
-.login_button:hover {
+.login_button:focus {
   border-bottom: solid 4px #5cdb95;
-  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.19);
   font-weight: 500;
 }
 form {
@@ -253,15 +244,20 @@ input {
 .login-button {
   display: flex;
   justify-content: center;
+  height: 65px;
+  margin-top: 1rem;
 }
 
 .new-account {
+  color: #5f5f5f;
   margin-top: 5rem;
 }
 .create {
   color: #5cdb95;
 }
-.input-box {
-  margin: 0 100px;
+.form-box {
+  margin: 0 15%;
+  display: flex;
+  justify-content: center;
 }
 </style>

@@ -33,20 +33,20 @@
 export default {
   name: "my-events",
 
-  data: function () {
+  data: function() {
     return {
       user: {},
       events: [],
       isSpeaker: "no",
     };
   },
-  created: function () {
+  created: function() {
     if (localStorage.speakerId) {
       this.isSpeaker = "yes";
       const id = localStorage.speakerId;
       this.$http
         .get(`${process.env.VUE_APP_API_URL}speakers/${id}/events`)
-        .then(function (data) {
+        .then(function(data) {
           this.events = data.body;
         });
     }
@@ -55,7 +55,7 @@ export default {
       this.isSpeaker = "no";
       this.$http
         .get(`${process.env.VUE_APP_API_URL}users/${id}/events`)
-        .then(function (data) {
+        .then(function(data) {
           this.user = data.body;
         });
     }

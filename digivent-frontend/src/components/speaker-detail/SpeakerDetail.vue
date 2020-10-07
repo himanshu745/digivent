@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div>
+    <div class="heading">
       <h3>Host Details</h3>
     </div>
     <div class="speaker-img">
@@ -46,7 +46,7 @@ export default {
   methods: {
     getSpeaker: function() {
       const id = this.$route.params.speakerId;
-
+      console.log(id);
       this.$http
         .get(`${process.env.VUE_APP_API_URL}speakers/${id}`)
         .then(function(data) {
@@ -62,4 +62,12 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/style/_variables.scss";
+
+.heading {
+  background: #05386b;
+  display: flex;
+  // width: 80%;
+  margin-top: 6rem;
+  margin-left: 5rem;
+}
 </style>
