@@ -63,7 +63,7 @@ router.delete("/:id", (req, res, next) => {
 
 router.get("/:id/events", (req, res, next) => {
   Event.find({ speaker: req.speaker.id })
-  .populate("speaker")
+    .populate("speaker")
     .sort({ createdAt: "desc" })
     .then((events) => {
       return res.status(200).send(events);
