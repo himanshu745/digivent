@@ -2,7 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import VueResource from "vue-resource";
 import VueRouter from "vue-router";
-import vuetify from './plugins/vuetify';
+import vuetify from "./plugins/vuetify";
 
 Vue.use(VueResource);
 Vue.use(VueRouter);
@@ -89,15 +89,13 @@ const routes = [
     path: "/speaker-detail",
     component: () => import("./components/speaker-detail/SpeakerDetail.vue"),
     props: true,
-  }
-  
-  ,
+  },
   {
     name: "my-events",
     path: "/my-events",
     component: () => import("./components/my-event/MyEvent.vue"),
     props: true,
-  }
+  },
 ];
 
 const router = new VueRouter({
@@ -110,5 +108,5 @@ Vue.config.productionTip = false;
 new Vue({
   render: (h) => h(App),
   vuetify,
-  router
+  router,
 }).$mount("#app");
