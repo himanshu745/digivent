@@ -42,4 +42,13 @@ router.delete("/:id", (req, res, next) => {
     .catch(next);
 });
 
+// Post question response by speakerId
+router.put("/:id/response", (req, res, next) => {
+  Question.findByIdAndUpdate(req.question.id, req.body)
+  .then((question) => {
+    res.status(200).send(question);
+  })
+  .catch(next);
+});
+
 module.exports = router;

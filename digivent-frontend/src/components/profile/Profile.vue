@@ -45,42 +45,54 @@
         </div>
       </div>
     </div>
-
-    <a v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut">Log Out</a>
+    <a class="btn" v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut"
+      >Log Out</a
+    >
   </div>
 </template>
 
 <script>
+import EventBus from "../../eventBus.js";
+
 export default {
   name: "profile",
 
-  data: function () {
+  data: function() {
     return {
       event: {},
-      loggedIn: "no",
+      loggedIn: localStorage.loggedIn,
       user: {},
       isSpeaker: "no",
       speaker: {},
     };
   },
-  created: function () {
+  created: function() {
     if (localStorage.speakerId) {
       this.isSpeaker = "yes";
       const id = localStorage.speakerId;
       this.$http
         .get(`${process.env.VUE_APP_API_URL}speakers/${id}`)
-        .then(function (data) {
+        .then(function(data) {
           this.speaker = data.body;
         });
     } else {
       const id = localStorage.userId;
-      console.log(id);
       this.$http
         .get(`${process.env.VUE_APP_API_URL}users/${id}`)
-        .then(function (data) {
+        .then(function(data) {
           this.user = data.body;
         });
     }
+  },
+  methods: {
+    setLoggedOut: function() {
+      localStorage.loggedIn = "no";
+      localStorage.removeItem("userName");
+      localStorage.removeItem("userId");
+      localStorage.removeItem("speakerId");
+      EventBus.$emit("$loggedIn");
+      this.$router.push({ path: "/login" });
+    },
   },
 };
 </script>

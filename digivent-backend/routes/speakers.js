@@ -93,6 +93,29 @@ router.post("/:id/events", (req, res, next) => {
     .catch(next);
 });
 
+// //Post question response by speakerId
+// router.put("/:id/response", (req, res, next) => {
+//   Question.up
+//   // const event = new Event(req.body);
+//   // event.speaker = req.speaker.id;
+//   // event
+//   //   .save()
+//   //   .then((event) => {
+//   //     if (!req.speaker.events) {
+//   //       req.speaker.events = [];
+//   //     }
+//   //     req.speaker.events.push(event);
+//   //     req.speaker
+//   //       .save()
+//   //       .then((speaker) => {
+//   //         console.log("Post event with speaker's name");
+//   //         res.status(201).send({ event: event, speaker: speaker });
+//   //       })
+//   //       .catch(next);
+//   //   })
+//   //   .catch(next);
+// });
+
 // Get questions by speaker Id
 router.get("/:id/questions", (req, res, next) => {
   Question.find({ speaker: req.params.id })

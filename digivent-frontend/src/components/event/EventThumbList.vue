@@ -1,22 +1,18 @@
 <template>
-  <keep-alive>
-    <div class="contents">
-      <div class="contents__box" v-for="(event, i) in events" :key="i">
-        <router-link
-          v-bind:to="{
-            name: 'detail',
-            params: { eventId: event._id },
-          }"
-        >
-          <div class="contents__img">
-            <img :src="event.image" :alt="event.name" />
-          </div>
-          <h2>{{ event.name }}</h2>
-          <h4>{{ event.speaker.firstName }} {{ event.speaker.lastName }}</h4>
-        </router-link>
-      </div>
+  <v-flex class="contents">
+    <div class="contents__box" v-for="(event, i) in events" :key="i">
+      <router-link
+        v-bind:to="{
+          name: 'detail',
+          params: { eventId: event._id },
+        }"
+      >
+        <v-img class="contents__img" :src="event.image" :alt="event.name" />
+        <h2>{{ event.name }}</h2>
+        <h4>{{ event.speaker.firstName }} {{ event.speaker.lastName }}</h4>
+      </router-link>
     </div>
-  </keep-alive>
+  </v-flex>
 </template>
 
 <script>
@@ -43,10 +39,6 @@ export default {
     width: 300px;
     margin: 8px 0;
     overflow: hidden;
-    img {
-      height: 100%;
-      width: auto;
-    }
   }
 }
 ::-webkit-scrollbar {

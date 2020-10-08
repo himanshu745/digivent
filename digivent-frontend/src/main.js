@@ -91,6 +91,12 @@ const routes = [
     props: true,
   },
   {
+    name: "user-reply-question",
+    path: "/user-reply-question",
+    component: () => import("./components/question-reply/UserQuestionReply"),
+    props: true,
+  },
+  {
     name: "my-events",
     path: "/my-events",
     component: () => import("./components/my-event/MyEvent.vue"),

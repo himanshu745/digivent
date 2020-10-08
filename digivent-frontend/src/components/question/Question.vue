@@ -9,13 +9,15 @@
       <h3>{{ event.speaker.firstName }} {{ event.speaker.lastName }}</h3>
       <h3>{{ event.name }}</h3>
       <div v-for="(question, i) in questions" :key="i">
-        <div class="thumb">
-          <img :src="question.user.image" :alt="question.user.userName" />
-        </div>
-        <div>
-          <h3>{{ question.user.userName }}</h3>
-          <p>{{ question.body }}</p>
-        </div>
+        <router-link :to="{ name: 'user-reply-question', params: { questionId : question._id}}">
+          <div class="thumb">
+            <img :src="question.user.image" :alt="question.user.userName" />
+          </div>
+          <div>
+            <h3>{{ question.user.userName }}</h3>
+            <p class="text-break" style="max-width: 100%;">{{ question.body }}</p>
+          </div>
+        </router-link>
       </div>
       <router-link
         :to="{ name: 'post-question', params: { eventId: event._id } }"
@@ -28,7 +30,7 @@
 <script>
 export default {
   name: "question",
-  data: function () {
+  data: function() {
     return {
       questions: [],
       event: {
@@ -40,20 +42,20 @@ export default {
       },
     };
   },
-  mounted: function () {
+  mounted: function() {
     const eventId = this.$route.params.eventId;
     this.$http
       .get(`${process.env.VUE_APP_API_URL}events/${eventId}`)
-      .then(function (data) {
+      .then(function(data) {
         this.event = data.body;
       });
     this.getQuestions(eventId);
   },
   methods: {
-    getQuestions: function (eventId) {
+    getQuestions: function(eventId) {
       this.$http
         .get(`${process.env.VUE_APP_API_URL}events/${eventId}/questions`)
-        .then(function (data) {
+        .then(function(data) {
           console.log(this.questions);
           this.questions = data.body;
         });
