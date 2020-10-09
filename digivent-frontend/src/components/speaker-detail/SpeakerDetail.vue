@@ -80,6 +80,9 @@ export default {
 .heading {
   background: #05386b;
   display: flex;
+  @include mobile{
+    width: 100%
+  }
 }
 .heading-text {
   margin-top: 1rem;
