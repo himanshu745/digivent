@@ -1,30 +1,55 @@
 <template>
-  <div>
-    <div>
-      <h1>Questions</h1>
-      <div class="thumb thumb--b">
-        <img :src="event.speaker.image" :alt="event.speaker.firstName" />
-      </div>
-      <p>Host name</p>
-      <h3>{{ event.speaker.firstName }} {{ event.speaker.lastName }}</h3>
-      <h3>{{ event.name }}</h3>
-      <div v-for="(question, i) in questions" :key="i">
-        <router-link :to="{ name: 'user-reply-question', params: { questionId : question._id}}">
-          <div class="thumb">
-            <img :src="question.user.image" :alt="question.user.userName" />
-          </div>
-          <div>
-            <h3>{{ question.user.userName }}</h3>
-            <p class="text-break" style="max-width: 100%;">{{ question.body }}</p>
-          </div>
-        </router-link>
-      </div>
-      <router-link
-        :to="{ name: 'post-question', params: { eventId: event._id } }"
-        >Ask question
-      </router-link>
-    </div>
-  </div>
+    <v-main>
+      <div aspect-ratio="1.4" class="header"></div>
+      <v-layout column>
+        <v-flex class="title">
+          <img
+          src="@/assets/Frame 12.svg"
+          alt="Frame"
+          @click.prevent="closePage(event._id)"
+        />
+          <h2>View All Questions</h2>
+        </v-flex>
+        <v-card class="rounded-xl message-box">
+          <v-flex ma-4 class="thumb-speaker">
+            <v-img
+              class="rounded-circle thumb-img--large"
+              aspect-ratio="1"
+              :src="event.speaker.image" :alt="event.speaker.firstName"/>
+          </v-flex>
+          <v-flex>
+            <v-col cols="12" sm="6" class="pt-0">
+              <h5 class="text--secondary mb-1">Host name</h5>
+              <h2 class="font-weight-medium">
+                {{ event.speaker.firstName }} {{ event.speaker.lastName }}
+              </h2>
+              <h4>{{ event.name }}</h4>
+            </v-col>
+          </v-flex>
+          <v-list three-line class="mx-auto scrollbar">
+            <template v-for="(question, i) in questions">
+                <v-list-item class="flex-row" :key="question._id">
+                  <router-link class="d-flex" :to="{ name: 'user-reply-question', params: { questionId : question._id, eventId: question.event._id}}">
+                    <v-list-item-avatar>
+                      <v-img :src="question.user.image" :alt="question.user.userName" />
+                    </v-list-item-avatar>
+                    <v-list-item-content class="border-box">
+                      <v-list-item-title v-text="question.user.userName"></v-list-item-title>
+                      <v-list-item-subtitle v-text="question.body" class="text-break"></v-list-item-subtitle>
+                    </v-list-item-content>
+                  </router-link>
+                </v-list-item>   
+              <v-divider v-if="i < questions.length - 1" :key="i"></v-divider>
+
+            </template>
+          </v-list>
+          <router-link
+            :to="{ name: 'post-question', params: { eventId: event._id } }"
+            >Ask question
+          </router-link>
+        </v-card>
+      </v-layout>
+    </v-main>
 </template>
 
 <script>
@@ -34,11 +59,7 @@ export default {
     return {
       questions: [],
       event: {
-        speaker: {
-          firstName: String,
-          lastName: String,
-          image: String,
-        },
+        speaker: {},
       },
     };
   },
@@ -52,11 +73,13 @@ export default {
     this.getQuestions(eventId);
   },
   methods: {
+    closePage: function(eventId) {
+      this.$router.push({ name: "detail", params: { eventId: eventId } });
+    },
     getQuestions: function(eventId) {
       this.$http
         .get(`${process.env.VUE_APP_API_URL}events/${eventId}/questions`)
         .then(function(data) {
-          console.log(this.questions);
           this.questions = data.body;
         });
     },
@@ -66,15 +89,62 @@ export default {
 
 <style lang="scss">
 @import "@/style/_variables.scss";
-// .flexbox {
-//   display: flex;
-//   align-items: center;
-//   overflow: hidden;
-// }
-// .thumb {
-//   @include thumb-img;
-//   &--b {
-//     @include thumb-img--b;
-//   }
-// }
+.header {
+  width: 100%;
+  height: 30%;
+  background: $primary;
+}
+.thumb {
+  &-speaker {
+    z-index: 1;
+    position: absolute;
+    top: -80px;
+    right: 30px;
+    @include desktop {
+      right: 5%;
+    }
+  }
+  &-img--large {
+    @include thumb-img--large;
+  }
+}
+
+.title {
+  position: absolute;
+  left: 30px;
+  top: 50px;
+  color: white;
+  font-weight: 400;
+  @include desktop {
+    left: 5%;
+  }
+}
+.message-box {
+  background: white;
+  position: absolute;
+  top: 15%;
+  width: 100%;
+  margin-top: 5%;
+  padding: 50px 10px;
+  bottom: 0;
+  @include desktop {
+    width: 80%;
+    max-width: 700px;
+    height: 70%;
+    top: auto;
+    bottom: 0;
+    right:0;
+    padding: 50px;
+    margin: 0 5% 5%;
+  }
+}
+
+.scrollbar {
+  padding: 0 20px;
+  max-width:700px;
+  max-height: 450px;
+  overflow-y:scroll;
+  overflow-x:hidden;
+}
+
 </style>

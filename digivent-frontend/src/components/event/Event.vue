@@ -123,8 +123,8 @@ export default {
   background: $primary;
   @include display-center;
   @include desktop {
-    height: 50%;
-    padding: 0 30%;
+    height: 60%;
+    padding: 0 30% 10%;
   }
 }
 

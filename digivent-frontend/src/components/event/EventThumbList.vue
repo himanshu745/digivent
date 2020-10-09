@@ -7,8 +7,10 @@
           params: { eventId: event._id },
         }"
       >
-        <v-img class="contents__img" :src="event.image" :alt="event.name" />
-        <h2>{{ event.name }}</h2>
+          <div class="contents__img">
+            <img :src="event.image" :alt="event.name" />
+          </div>
+          <h2>{{ event.name }}</h2>
         <h4>{{ event.speaker.firstName }} {{ event.speaker.lastName }}</h4>
       </router-link>
     </div>
@@ -39,6 +41,10 @@ export default {
     width: 300px;
     margin: 8px 0;
     overflow: hidden;
+    img {
+      height: 100%;
+      width: auto;
+    }
   }
 }
 ::-webkit-scrollbar {
