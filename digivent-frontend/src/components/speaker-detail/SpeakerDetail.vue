@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="heading">
-      <h3>Host Details</h3>
+      <h3 class="heading-main">Host Details</h3>
     </div>
-    <div class="speaker-img">
-      <h3>{{ speaker.firstName }} {{ speaker.lastName }}</h3>
+    <div class="speaker">
+      <h3 class="speaker-">{{ speaker.firstName }} {{ speaker.lastName }}</h3>
       <img :src="speaker.image" :alt="speaker.firstName" />
     </div>
     <div class="about">
@@ -36,7 +36,7 @@
 export default {
   name: "speaker-detail",
   props: ["events"],
-  data: function() {
+  data: function () {
     return {
       speaker: {
         events: [],
@@ -44,17 +44,17 @@ export default {
     };
   },
   methods: {
-    getSpeaker: function() {
+    getSpeaker: function () {
       const id = this.$route.params.speakerId;
       console.log(id);
       this.$http
         .get(`${process.env.VUE_APP_API_URL}speakers/${id}`)
-        .then(function(data) {
+        .then(function (data) {
           this.speaker = data.body;
         });
     },
   },
-  created: function() {
+  created: function () {
     this.getSpeaker();
   },
 };
@@ -66,8 +66,14 @@ export default {
 .heading {
   background: #05386b;
   display: flex;
-  // width: 80%;
+}
+.heading-main {
+  color: white;
   margin-top: 6rem;
   margin-left: 5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;
 }
 </style>
