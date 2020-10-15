@@ -1,87 +1,118 @@
 <template>
-  <div class="wrap">
-    <div class="profile">
-    <v-layout column v-if="isSpeaker === 'yes'" class="speaker">
-      <div class="top">
-        <h1>Speaker Profile</h1>
-        <img :src="speaker.image" />
-      </div>
-      <v-flex class="profile-box">
-        <v-row>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-subtitle>First Name</v-list-item-subtitle>
-              <v-list-item-title>{{ speaker.firstName }}</v-list-item-title>
-              <hr />
-            </v-list-item-content>
-          </v-list-item>
-        </v-row>
-        <v-row>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-subtitle>Last Name</v-list-item-subtitle>
-              <v-list-item-title>{{ speaker.lastName }}</v-list-item-title>
-              <hr />
-            </v-list-item-content>
-          </v-list-item>
-        </v-row>
-        <v-row>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-subtitle>Username</v-list-item-subtitle>
-              <v-list-item-title>{{ speaker.userName }}</v-list-item-title>
-              <hr />
-            </v-list-item-content>
-          </v-list-item>
-        </v-row>
-        <v-row>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-subtitle>Email</v-list-item-subtitle>
-              <v-list-item-title>{{ speaker.email }}</v-list-item-title>
-              <hr />
-            </v-list-item-content>
-          </v-list-item>
-        </v-row>
-        <v-row>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-subtitle>Description</v-list-item-subtitle>
-              <v-list-item-title>{{ speaker.description }}</v-list-item-title>
-              <hr />
-            </v-list-item-content>
-          </v-list-item>
-        </v-row>
+  <v-main>
+    <div aspect-ratio="1.4" class="header"></div>
+    <v-layout column v-if="isSpeaker === 'yes'">
+      <v-flex class="title">
+        <h2>Speaker Profile</h2>
       </v-flex>
-      <a v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut">Log Out</a>
-    </v-layout>
-
-    <v-layout v-else class="user">
-      <div class="top">
-        <h1>User Profile</h1>
-        <img :src="user.image" />
-      </div>
-      <v-flex class="profile-box">
-        <v-row>
-          <v-list-item-content>
-            <v-list-item-subtitle>Username</v-list-item-subtitle>
-            <v-list-item-title>{{ user.userName }}</v-list-item-title>
-            <hr />
-          </v-list-item-content>
-        </v-row>
-        <v-row>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-subtitle>Email</v-list-item-subtitle>
-              <v-list-item-title>{{ user.email }}</v-list-item-title>
+      <v-flex class="rounded-xl rounded-box">
+        <v-flex ma-4 class="thumb-speaker">
+          <v-img
+            class="rounded-circle thumb-img--large"
+            aspect-ratio="1"
+            :src="speaker.image"
+            :alt="speaker.firstName"
+          />
+        </v-flex>
+        <v-list three-line class="mt-10">
+          <v-list-item class="flex-row">
+            <v-list-item-content class="border-box">
+              <v-list-item-subtitle class="text-break"
+                >First Name</v-list-item-subtitle
+              >
+              <v-list-item-title v-text="speaker.firstName"></v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-        </v-row>
+          <v-divider></v-divider>
+          <v-list-item class="flex-row">
+            <v-list-item-content class="border-box">
+              <v-list-item-subtitle class="text-break"
+                >Last Name</v-list-item-subtitle
+              >
+              <v-list-item-title v-text="speaker.lastName"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-divider></v-divider>
+          <v-list-item class="flex-row">
+            <v-list-item-content class="border-box">
+              <v-list-item-subtitle class="text-break"
+                >Username</v-list-item-subtitle
+              >
+              <v-list-item-title v-text="speaker.userName"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-divider></v-divider>
+          <v-list-item class="flex-row">
+            <v-list-item-content class="border-box">
+              <v-list-item-subtitle class="text-break"
+                >Email</v-list-item-subtitle
+              >
+              <v-list-item-title v-text="speaker.email"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-divider></v-divider>
+          <v-list-item class="flex-row">
+            <v-list-item-content class="border-box">
+              <v-list-item-subtitle class="text-break"
+                >Description</v-list-item-subtitle
+              >
+              <v-list-item-title
+                v-text="speaker.description"
+              ></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-divider></v-divider>
+        </v-list>
+        <a
+          class="btn white--text"
+          v-if="loggedIn === 'yes'"
+          @click.prevent="setLoggedOut"
+          >Log Out</a
+        >
       </v-flex>
-      <a v-if="loggedIn === 'yes'" @click.prevent="setLoggedOut">Log Out</a>
     </v-layout>
-    </div>
-  </div>
+    <v-layout column v-else>
+      <v-flex class="title">
+        <h2>User Profile</h2>
+      </v-flex>
+      <v-flex class="rounded-xl rounded-box">
+        <v-flex ma-4 class="thumb-speaker">
+          <v-img
+            class="rounded-circle thumb-img--large"
+            aspect-ratio="1"
+            :src="user.image"
+            :alt="user.firstName"
+          />
+        </v-flex>
+        <v-list three-line class="mt-10">
+          <v-list-item class="flex-row">
+            <v-list-item-content class="border-box">
+              <v-list-item-subtitle class="text-break"
+                >Username</v-list-item-subtitle
+              >
+              <v-list-item-title v-text="user.userName"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-divider></v-divider>
+          <v-list-item class="flex-row">
+            <v-list-item-content class="border-box">
+              <v-list-item-subtitle class="text-break"
+                >Email</v-list-item-subtitle
+              >
+              <v-list-item-title v-text="user.email"></v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-divider></v-divider>
+        </v-list>
+        <a
+          class="btn white--text"
+          v-if="loggedIn === 'yes'"
+          @click.prevent="setLoggedOut"
+          >Log Out</a
+        >
+      </v-flex>
+    </v-layout>
+  </v-main>
 </template>
 
 <script>
@@ -96,7 +127,7 @@ export default {
       loggedIn: localStorage.loggedIn,
       user: {},
       isSpeaker: "no",
-      speaker: {}
+      speaker: {},
     };
   },
   created: function() {
@@ -132,62 +163,58 @@ export default {
 
 <style lang="scss" scoped>
 @import "@/style/_variables.scss";
-
-h1 {
-  @include heading-large;
+.header {
+  width: 100%;
+  height: 30%;
+  background: $primary;
 }
-
-.info {
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 1rem 0;
-  align-items: center;
-}
-.row {
-  display: flex;
-  flex-direction: row;
-  p {
-    text-align: left;
-    margin: 10px;
+.thumb {
+  &-speaker {
+    @include thumb-speaker;
+  }
+  &-img--large {
+    @include thumb-img--large;
   }
 }
-.top {
-  z-index: 1;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  align-items: center;
-  
-}
-.profile-box {
+
+.title {
   position: absolute;
-  top:50%;
-left: 50%;
-transform: translate(-50%, -50%); 
-margin: auto;
-  width: 60%;
-  background-color: white;
-  padding: 50px;
-  border-radius: 20px;
+  left: 30px;
+  top: 50px;
+  color: white;
+  font-weight: 400;
+  @include desktop {
+    left: 5%;
+  }
 }
-.divider {
-  width: 100%;
-}
-v-row {
-  width: 100%;
-}
-img {
-  border-radius: 50%;
+.rounded-box {
+  @include rounded-box;
 }
 
-.wrap {
-  background-color: $secondary;
+.scrollbar {
+  padding: 0 20px;
+  max-width: 700px;
+  max-height: 450px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  &-speaker {
+    @include desktop {
+      max-height: 400px;
+      position: absolute;
+      left: 40%;
+    }
+  }
 }
-// .profile {
-//   background-color: white;
-// }
+
+.btn {
+  @include buttonprimary;
+  &--light {
+    @include buttonlight;
+  }
+  &-group {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
 </style>

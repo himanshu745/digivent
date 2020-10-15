@@ -3,7 +3,11 @@
     <v-img aspect-ratio="1.4" :src="event.image" :alt="event.name"></v-img>
     <v-layout column>
       <v-flex class="title">
-        <img src="@/assets/chevron-left.svg" alt="chevron-left" @click.prevent="goBack" />
+        <img
+          src="@/assets/chevron-left.svg"
+          alt="chevron-left"
+          @click.prevent="goBack"
+        />
         <h2>Event Details</h2>
       </v-flex>
       <v-flex class="rounded-xl rounded-box--ma">
@@ -13,7 +17,9 @@
           </v-row>
           <v-row class="py-1 align-center">
             <img class="pr-2" src="@/assets/pin.svg" alt="pin" />
-            <h4 class="hightlight" @click.prevent="googleMap(event.address)">{{ event.address }}</h4>
+            <h4 class="hightlight" @click.prevent="googleMap(event.address)">
+              {{ event.address }}
+            </h4>
           </v-row>
           <v-row class="py-1 align-center">
             <img class="pr-2" src="@/assets/dates.svg" alt="dates" />
@@ -40,22 +46,24 @@
                 :src="event.speaker.image"
                 :alt="event.speaker.firstName"
               />
-              <h6
-                class="grey--text hightlight"
-              >{{ event.speaker.firstName }} {{ event.speaker.lastName }} ></h6>
+              <h6 class="grey--text hightlight">
+                {{ event.speaker.firstName }} {{ event.speaker.lastName }} >
+              </h6>
             </router-link>
             <!-- speaker's button -->
             <a
               v-if="isSpeaker === 'yes'"
               class="btn white--text"
               @click.prevent="checkSpeaker(event.speaker._id)"
-            >Edit event</a>
+              >Edit event</a
+            >
             <!-- user's button -->
             <router-link
               v-else
               class="btn btn--light"
               :to="{ name: 'question', params: { eventId: event._id } }"
-            >View Questions</router-link>
+              >View Questions</router-link
+            >
           </v-flex>
           <v-row class="py-4">
             <h3 class="font-weight-medium pb-2">Event Description</h3>
@@ -71,14 +79,12 @@
             <a
               class="btn btn--light"
               @click.prevent="deleteEvent(event._id, event.speaker._id)"
-            >Delete Event</a>
+              >Delete Event</a
+            >
           </div>
           <!-- user's button -->
           <div class="btn-group" v-else @click.prevent="bookEvent()">
-            <router-link
-              class="btn white--text"
-              :to="{ name: 'book', params: { event: event } }"
-            >Book</router-link>
+            <a class="btn white--text">Book</a>
           </div>
         </v-layout>
       </v-flex>
@@ -89,23 +95,23 @@
 <script>
 export default {
   name: "detail",
-  data: function() {
+  data: function () {
     return {
       event: {
-        speaker: {}
+        speaker: {},
       },
-      isSpeaker: "no"
+      isSpeaker: "no",
     };
   },
-  mounted: function() {
+  mounted: function () {
     const id = this.$route.params.eventId;
     this.$http
       .get(`${process.env.VUE_APP_API_URL}events/${id}`)
-      .then(function(data) {
+      .then(function (data) {
         this.event = data.body;
       });
   },
-  created: function() {
+  created: function () {
     if (localStorage.speakerId) {
       this.isSpeaker = "yes";
     }
@@ -114,7 +120,7 @@ export default {
     goBack() {
       return this.$router.push({ path: "/" });
     },
-    deleteEvent: function(eventId, speakerId) {
+    deleteEvent: function (eventId, speakerId) {
       if (localStorage.speakerId !== speakerId) {
         alert("You don't have permission to do.");
       } else {
@@ -122,40 +128,44 @@ export default {
         if (choice) {
           this.$http
             .delete(`${process.env.VUE_APP_API_URL}events/${eventId}`)
-            .then(function() {
+            .then(function () {
               this.$router.push({ path: "/my-events" });
             });
         }
       }
     },
-    bookEvent: function() {
+    bookEvent: function () {
       const event = this.event;
-      const id = localStorage.userId;
+      const userId = localStorage.userId;
       this.$http
-        .put(`${process.env.VUE_APP_API_URL}users/${id}/event`, event)
-        .then(function() {
+        .put(`${process.env.VUE_APP_API_URL}users/${userId}/event`, event)
+        .then(function () {
           alert("Booking confirmed!");
+          this.$router.push({
+            name: "book",
+            params: { eventId: event._id, userId: userId },
+          });
         });
     },
 
-    checkSpeaker: function(speakerId) {
+    checkSpeaker: function (speakerId) {
       if (localStorage.speakerId !== speakerId) {
         alert("You don't have permission to do.");
       } else {
         this.$router.push({
           name: "edit",
-          params: { eventId: this.event._id }
+          params: { eventId: this.event._id },
         });
       }
     },
-    googleMap: function(address) {
+    googleMap: function (address) {
       const place = address.replace(" ", "+");
       window.open(
         `https://www.google.com/maps/place/${place},christchurch`,
         "_blank"
       );
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -213,13 +223,10 @@ export default {
     left: 5%;
   }
 }
-
 .btn {
   @include buttonprimary;
-  width: 100%;
   &--light {
-    background: $secondary-light;
-    justify-items: stretch;
+    @include buttonlight;
   }
   &-group {
     display: flex;

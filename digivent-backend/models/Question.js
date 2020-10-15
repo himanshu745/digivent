@@ -6,14 +6,8 @@ const QuestionSchema = new mongoose.Schema(
     user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     event: { type: mongoose.Schema.Types.ObjectId, ref: "Event" },
     speaker: { type: mongoose.Schema.Types.ObjectId, ref: "Speaker" },
-    response: { type: String},
-    comments: [
-      {
-      user: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
-      body: String
-      }
-  ]
-},
+    response: { type: String },
+  },
   { timestamps: true }
 );
 

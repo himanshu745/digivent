@@ -6,7 +6,7 @@
         <img
           src="@/assets/Frame 12.svg"
           alt="Frame"
-          @click.prevent="closePage(event._id)"
+          @click.prevent="closePage()"
         />
         <h2>Host Details</h2>
       </v-flex>
@@ -124,8 +124,8 @@ export default {
     };
   },
   methods: {
-    closePage: function(eventId) {
-      this.$router.push({ name: "detail", params: { eventId: eventId } });
+    closePage: function() {
+      this.$router.push("/my-events");
     },
     checkForm: function() {
       if (
@@ -196,15 +196,14 @@ export default {
   height: 30%;
   background: $primary;
 }
+
+.title {
+  @include title;
+}
+
 .thumb {
   &-speaker {
-    z-index: 1;
-    position: absolute;
-    top: -80px;
-    right: 30px;
-    @include desktop {
-      right: 5%;
-    }
+    @include thumb-speaker;
   }
   &-img--large {
     @include thumb-img--large;
@@ -212,36 +211,13 @@ export default {
 }
 
 .rounded-box {
-  background: white;
-  position: absolute;
-  top: 15%;
-  width: 100%;
-  margin-top: 5%;
-  padding: 50px;
-  @include desktop {
-    width: 80%;
-    height: 70%;
-    top: auto;
-    bottom: 0;
-    margin: 0 5% 5%;
-  }
+  @include rounded-box;
 }
-.title {
-  position: absolute;
-  left: 30px;
-  top: 50px;
-  color: white;
-  font-weight: 400;
-  @include desktop {
-    left: 5%;
-  }
-}
+
 .btn {
   @include buttonprimary;
-  width: 100%;
   &--light {
-    background: $secondary-light;
-    justify-items: stretch;
+    @include buttonlight;
   }
   &-group {
     display: flex;

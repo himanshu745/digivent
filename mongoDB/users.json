@@ -1,0 +1,38 @@
+[
+  {
+    "_id": { "$oid": "5f6934c6c5b1b910e9597b80" },
+    "events": [
+      { "$oid": "5f66123c1d4dba3cc679741f" },
+      { "$oid": "5f6934c6c5b1b910e9597b80" }
+    ],
+    "userName": "wrankin0",
+    "password": "y8AjvI",
+    "email": "wrankin0@squidoo.com",
+    "image": "https://drive.google.com/file/d/1e7gw4IVXQFOpBiJAitftf9BPxOStyeeT/view?usp=sharing",
+    "createdAt": { "$date": { "$numberLong": "1600730310956" } },
+    "updatedAt": { "$date": { "$numberLong": "1600766647985" } },
+    "__v": { "$numberInt": "4" }
+  },
+  {
+    "_id": { "$oid": "5f6934d2c5b1b910e9597b81" },
+    "events": [],
+    "userName": "timmy",
+    "password": "uehncj",
+    "email": "timmy0@squidoo.com",
+    "image": "https://drive.google.com/file/d/1tnG6HWvv7d7Pi22-0g9HapTmyb2TtlwW/view?usp=sharing",
+    "createdAt": { "$date": { "$numberLong": "1600730322793" } },
+    "updatedAt": { "$date": { "$numberLong": "1600730322793" } },
+    "__v": { "$numberInt": "0" }
+  },
+  {
+    "_id": { "$oid": "5f6934dcc5b1b910e9597b82" },
+    "events": [],
+    "userName": "rohit",
+    "password": "233234",
+    "email": "rohit@squidoo.com",
+    "image": "https://drive.google.com/file/d/1tnG6HWvv7d7Pi22-0g9HapTmyb2TtlwW/view?usp=sharing",
+    "createdAt": { "$date": { "$numberLong": "1600730332305" } },
+    "updatedAt": { "$date": { "$numberLong": "1600766648583" } },
+    "__v": { "$numberInt": "0" }
+  }
+]

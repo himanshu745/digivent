@@ -12,19 +12,16 @@ const routes = [
     name: "event",
     path: "/",
     component: () => import("./components/event/Event"),
-    props: true,
   },
   {
     name: "edit",
     path: "/:eventId?/edit",
     component: () => import("./components/edit-event/EditEvent"),
-    props: true,
   },
   {
     name: "detail",
-    path: "/:eventId/detail",
+    path: "/:eventId?/detail",
     component: () => import("./components/event-detail/EventDetail"),
-    props: true,
     beforeEnter: (to, from, next) => {
       if (!localStorage.getItem("userName")) return next("login");
       next();
@@ -32,15 +29,13 @@ const routes = [
   },
   {
     name: "book",
-    path: "/booking",
+    path: "/:userId?/:eventId?/booking",
     component: () => import("./components/book/BookEvent"),
-    props: true,
   },
   {
     name: "profile",
     path: "/profile",
     component: () => import("./components/profile/Profile"),
-    props: true,
     beforeEnter: (to, from, next) => {
       if (!localStorage.getItem("userName")) return next("login");
       next();
@@ -55,25 +50,21 @@ const routes = [
     name: "register-user",
     path: "/register-user",
     component: () => import("./components/register/RegisterUser"),
-    props: true,
   },
   {
     name: "register-speaker",
     path: "/register-speaker",
     component: () => import("./components/register/RegisterSpeaker"),
-    props: true,
   },
   {
     name: "post-question",
-    path: "/post-question",
+    path: "/:eventId?/post-question",
     component: () => import("./components/post-question/PostQuestion"),
-    props: true,
   },
   {
     name: "question",
-    path: "/question",
+    path: "/:eventId?/question",
     component: () => import("./components/question/Question"),
-    props: true,
   },
   {
     name: "my-questions",
@@ -86,21 +77,22 @@ const routes = [
   },
   {
     name: "speaker-detail",
-    path: "/speaker-detail",
+    path: "/:speakerId?/speaker-detail",
     component: () => import("./components/speaker-detail/SpeakerDetail.vue"),
-    props: true,
   },
   {
     name: "user-reply-question",
-    path: "/user-reply-question",
+    path: "/:questionId/user-reply-question",
     component: () => import("./components/question-reply/UserQuestionReply"),
-    props: true,
   },
   {
     name: "my-events",
     path: "/my-events",
     component: () => import("./components/my-event/MyEvent.vue"),
-    props: true,
+    beforeEnter: (to, from, next) => {
+      if (!localStorage.getItem("userName")) return next("login");
+      next();
+    },
   },
 ];
 

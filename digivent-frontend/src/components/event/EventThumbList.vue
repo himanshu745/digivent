@@ -7,10 +7,10 @@
           params: { eventId: event._id },
         }"
       >
-          <div class="contents__img">
-            <img :src="event.image" :alt="event.name" />
-          </div>
-          <h2>{{ event.name }}</h2>
+        <v-flex class="contents__img">
+          <img :src="event.image" :alt="event.name" />
+        </v-flex>
+        <h2>{{ event.name }}</h2>
         <h4>{{ event.speaker.firstName }} {{ event.speaker.lastName }}</h4>
       </router-link>
     </div>

@@ -1,0 +1,74 @@
+[
+  {
+    "_id": { "$oid": "5f67e7691679d40cca533e41" },
+    "events": [
+      { "$oid": "5f69531c608518159f696577" },
+      { "$oid": "5f69530e608518159f696575" },
+      { "$oid": "5f6952fe608518159f696573" }
+    ],
+    "firstName": "Jimmy",
+    "lastName": "Chu",
+    "description": "UX Designer",
+    "email": "chuchuj@gmail.com",
+    "userName": "ChuJim",
+    "password": "JimmyC",
+    "image": "http://drive.google.com/uc?export=view&id=1YTFBhFNg0b-QKz6brGmcHdO35lDZDLq0",
+    "createdAt": { "$date": { "$numberLong": "1600644969437" } },
+    "updatedAt": { "$date": { "$numberLong": "1600766650119" } },
+    "__v": { "$numberInt": "4" }
+  },
+  {
+    "_id": { "$oid": "5f67e7611679d40cca533e40" },
+    "events": [
+      { "$oid": "5f6952e2608518159f696572" },
+      { "$oid": "5f67e95b8fb52e0bc2698233" }
+    ],
+    "firstName": "Louie",
+    "lastName": "Petter",
+    "description": "Full Stack Developer",
+    "email": "lp222@gmail.com",
+    "userName": "PetterL",
+    "password": "LouieeeP",
+    "image": "http://drive.google.com/uc?export=view&id=1YTFBhFNg0b-QKz6brGmcHdO35lDZDLq0",
+    "createdAt": { "$date": { "$numberLong": "1600644961300" } },
+    "updatedAt": { "$date": { "$numberLong": "1600738501669" } },
+    "__v": { "$numberInt": "1" }
+  },
+  {
+    "_id": { "$oid": "5f67e7571679d40cca533e3f" },
+    "events": [
+      { "$oid": "5f67e9228fb52e0bc2698232" },
+      { "$oid": "5f67e8fb8fb52e0bc2698231" }
+    ],
+    "firstName": "Nellie",
+    "lastName": "Mario",
+    "description": "Graphic Designer",
+    "email": "marionell@gmail.com",
+    "userName": "MelloNello",
+    "password": "YoungWildFree",
+    "image": "http://drive.google.com/uc?export=view&id=1YTFBhFNg0b-QKz6brGmcHdO35lDZDLq0",
+    "createdAt": { "$date": { "$numberLong": "1600644951171" } },
+    "updatedAt": { "$date": { "$numberLong": "1600738534721" } },
+    "__v": { "$numberInt": "1" }
+  },
+  {
+    "_id": { "$oid": "5f67e74b1679d40cca533e3e" },
+    "events": [
+      { "$oid": "5f67e8e48fb52e0bc2698230" },
+      { "$oid": "5f673f7a7926845e2db8989a" },
+      { "$oid": "5f67297a7926845e2db89899" },
+      { "$oid": "5f6612441d4dba3cc6797420" },
+      { "$oid": "5f66123c1d4dba3cc679741f" }
+    ],
+    "firstName": "Kile",
+    "lastName": "Smith",
+    "description": "Web Devloper",
+    "email": "kilesmith23@gmail.com",
+    "userName": "KileSmith",
+    "password": "SmithKile",
+    "image": "http://drive.google.com/uc?export=view&id=1YTFBhFNg0b-QKz6brGmcHdO35lDZDLq0",
+    "createdAt": { "$date": { "$numberLong": "1600644939502" } },
+    "updatedAt": { "$date": { "$numberLong": "1600738592223" } },
+    "__v": { "$numberInt": "1" }
+  }
+]

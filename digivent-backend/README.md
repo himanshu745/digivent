@@ -10,6 +10,8 @@
 MONGODB_URI=<YOUR_CONNECTION_URL>
 ```
 
+# find mongoDB folder and add json files to mongoDB as events, users, speakers, questions
+
 # To start
 
-3. npm start
+4. npm start

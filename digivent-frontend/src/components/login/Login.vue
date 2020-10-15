@@ -64,7 +64,7 @@
         </div>
 
         <v-text-field
-          v-model="speaker.password"
+          v-model="speaker.userName"
           :counter="10"
           label="User Name"
           id="username"
@@ -191,7 +191,6 @@ h1 {
   width: 100%;
   display: flex;
   justify-content: center;
-  @include heading-large;
   color: black;
 }
 .login {
