@@ -36,5 +36,6 @@ export default {
   height: 65px;
   border-radius: 20px;
   border: none;
+  background: white;
 }
 </style>
